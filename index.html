@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<title>Message Framer Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --app:#F4F4F8; --ink:#14142B; --muted:#6B6B80; --line:#E6E6EE; --field:#F4F4F8;
+  --brand:#4A35E8; --brand-ink:#FFFFFF; --brand-soft:#EEEBFF; --brand-press:#3A27C9;
+  --ok:#14A35C; --ok-soft:#E3F7EC; --err:#D93838; --fix:#B54708; --fix-soft:#FFF1E5; --warn:#9A5B00; --warn-soft:#FFF4DE;
+  --font:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --t1-bg:#FFF1D6; --t1:#8A5A00; --t2-bg:#E3F4FF; --t2:#0B5C8C; --t3-bg:#E6F7EE; --t3:#146B3F; --insight-dt:#4B4580; --insight-sm:#6E6896;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html,body{overscroll-behavior-y:contain}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--app);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button{font:inherit}
+.hidden{display:none !important}
+.app{max-width:440px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}
+.screen{padding:0 20px 150px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;align-items:center;gap:8px;height:56px;margin:0 -20px 8px;padding:0 12px}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:none;background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;flex:none}
+.icon-btn:active{background:var(--field)}
+.bar-title{font-weight:700;font-size:15px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.muted-title{font-weight:600;font-size:13px;color:var(--muted);padding-left:8px}
+.text-btn{border:none;background:none;color:var(--brand);font-weight:700;font-size:14px;padding:8px 10px;cursor:pointer}
+
+.logo{display:flex;align-items:center;gap:10px;padding:28px 0 40px}
+.logo-mark{width:36px;height:36px;border-radius:11px;background:var(--brand);display:grid;place-items:center}
+.logo-text{font-weight:800;font-size:17px;letter-spacing:-0.02em}
+.logo-text small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
+
+h1{font-size:26px;line-height:1.2;font-weight:800;letter-spacing:-0.03em;margin:4px 0 8px}
+h3{font-size:16px;font-weight:800;letter-spacing:-0.01em;margin:0 0 10px}
+.sub{color:var(--muted);margin:0 0 24px;font-size:15px}
+.q{font-weight:800;font-size:16px;letter-spacing:-0.01em;margin:28px 0 4px}
+.q-hint{color:var(--muted);font-size:13px;margin:0 0 12px}
+.num{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:7px;background:var(--brand-soft);color:var(--brand);font-size:12px;font-weight:800;margin-right:8px;vertical-align:1px}
+
+.label{display:block;font-weight:600;font-size:13px;margin:0 0 8px}
+.input{display:block;width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1.5px solid transparent;border-radius:14px;padding:14px 16px;margin:0 0 6px;transition:border-color .15s}
+textarea.input{min-height:100px;resize:none;line-height:1.5}
+textarea.input.tall{min-height:150px}
+.input:focus{outline:none;border-color:var(--brand);background:var(--bg)}
+.input.bad{border-color:var(--err)}
+.err{color:var(--err);font-size:13px;font-weight:500;min-height:18px;margin:0}
+.counter{font-size:12px;color:var(--muted);text-align:right;margin:-2px 0 0}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--brand);color:var(--brand)}
+
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile{text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:12px;cursor:pointer;color:var(--ink)}
+.profile b{display:block;font-size:14px;line-height:1.3}
+.profile[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.other{margin-top:10px}
+.other-profile{grid-column:1 / -1;text-align:left;margin-top:2px}
+.other-profile span{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.other-profile[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
+.field-help{font-size:12px;color:var(--muted);margin:9px 0 5px}
+.option-input{margin-top:10px}
+.option-input::placeholder{color:#85859A}
+
+.insight{background:var(--brand-soft);border-radius:16px;padding:14px 16px;margin:12px 0 0}
+.insight-title{font-size:13px;font-weight:800;color:var(--brand);margin:0 0 10px;display:flex;gap:8px;align-items:center}
+.insight dl{margin:0;display:grid;gap:8px}
+.insight dt{font-size:12px;font-weight:700;color:var(--insight-dt)}
+.insight dd{margin:0;font-size:14px}
+.insight small{display:block;font-size:11px;color:var(--insight-sm);margin-top:10px}
+
+.note{display:flex;gap:10px;align-items:flex-start;background:var(--field);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted);margin:24px 0 0}
+.note svg{flex:none;margin-top:1px}
+
+.cta{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.cta-in{max-width:400px;margin:0 auto}
+.cta-in.row{display:flex;gap:10px}
+.cta-in.row .btn{flex:1;margin:0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;font-size:16px;font-weight:700;border:none;border-radius:14px;background:var(--brand);color:var(--brand-ink);cursor:pointer}
+.btn:active{background:var(--brand-press)}
+.btn.ghost{background:var(--brand-soft);color:var(--brand)}
+.btn + .btn{margin-top:10px}
+.hint-quota{text-align:center;font-size:12px;color:var(--muted);margin:8px 0 0}
+.btn:focus-visible,.chip:focus-visible,.icon-btn:focus-visible,.profile:focus-visible,.tab:focus-visible,.mini:focus-visible,.mode:focus-visible,.copy:focus-visible,.text-btn:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
+
+.hero-icon{width:72px;height:72px;border-radius:22px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;margin:20px 0 22px}
+.mail{border:1px solid var(--line);border-radius:18px;padding:16px;margin:4px 0 16px}
+.mail-top{display:flex;gap:12px;align-items:center;margin-bottom:12px}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--brand);display:grid;place-items:center;color:var(--brand-ink);font-weight:800;font-size:14px}
+.mail-from{font-weight:700;font-size:14px}
+.mail-from span{display:block;font-weight:500;font-size:12px;color:var(--muted)}
+.mail p{margin:0 0 14px;font-size:14px}
+.code-box{font-size:28px;font-weight:800;letter-spacing:10px;color:var(--brand);margin:0 0 14px}
+.mail .btn{height:44px;font-size:14px}
+
+/* Home modes */
+.modes{display:grid;gap:12px}
+.mode{display:flex;gap:14px;align-items:flex-start;text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:20px;padding:18px;cursor:pointer;color:var(--ink)}
+.mode:active{border-color:var(--brand)}
+.mode-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none}
+.mode-icon.a{background:var(--brand-soft);color:var(--brand)}
+.mode-icon.b{background:#E6F7EE;color:#146B3F}
+.mode b{display:block;font-size:17px;font-weight:800;letter-spacing:-0.01em;margin-bottom:4px}
+.mode span{display:block;font-size:14px;color:var(--muted)}
+.mode .arrow{margin-left:auto;align-self:center;color:var(--muted);flex:none}
+.tip{margin-top:28px;border-radius:18px;background:var(--field);padding:16px}
+.tip b{display:block;font-size:13px;margin-bottom:6px}
+.tip p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Loading */
+.skeleton{border-radius:18px;background:var(--field);height:190px;margin:0 0 14px;position:relative;overflow:hidden}
+@media (prefers-reduced-motion:no-preference){
+  .skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.6),transparent);animation:shim 1.2s infinite}
+  @keyframes shim{to{transform:translateX(100%)}}
+}
+.loading-steps{list-style:none;padding:0;margin:0 0 22px;font-size:14px;color:var(--muted)}
+.loading-steps li{display:flex;gap:10px;align-items:center;padding:5px 0}
+.loading-steps li i{width:18px;height:18px;border-radius:50%;border:2px solid var(--line);flex:none}
+.loading-steps li.done{color:var(--ink)}
+.loading-steps li.done i{background:var(--ok);border-color:var(--ok)}
+
+/* Results */
+.context{background:var(--field);border-radius:16px;padding:14px 16px;margin:0 0 20px;font-size:13px;display:grid;grid-template-columns:auto 1fr;gap:6px 14px}
+.context b{font-size:12px;color:var(--muted);font-weight:600}
+.card{border:1px solid var(--line);border-radius:20px;padding:18px;margin:0 0 16px;background:var(--bg)}
+.card.top{border:2px solid var(--brand)}
+.badge{display:inline-flex;gap:6px;align-items:center;background:var(--brand);color:var(--brand-ink);font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;margin:0 0 10px}
+.badge-why{font-size:13px;color:var(--brand);margin:-4px 0 12px}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:5px 10px;border-radius:8px;margin-bottom:10px}
+.tone-1{background:var(--t1-bg);color:var(--t1)}.tone-2{background:var(--t2-bg);color:var(--t2)}.tone-3{background:var(--t3-bg);color:var(--t3)}
+.card h2{font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px}
+.tabs{display:flex;gap:4px;background:var(--field);border-radius:12px;padding:4px;margin:0 0 14px;overflow-x:auto}
+.tab{flex:1;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:700;padding:8px 6px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{background:var(--bg);color:var(--ink);box-shadow:0 1px 2px rgba(20,20,43,.08)}
+.flow{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:12px}
+.flow li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:14px}
+.flow li i{width:28px;height:28px;border-radius:50%;background:var(--brand-soft);color:var(--brand);font-style:normal;font-size:12px;font-weight:800;display:grid;place-items:center}
+.flow li b{display:block;font-size:12px;color:var(--muted);font-weight:700}
+.out{background:var(--field);border-radius:14px;padding:14px;font-size:14px;white-space:pre-line;margin:0 0 14px}
+.meta{border-top:1px solid var(--line);padding-top:12px;display:grid;gap:10px}
+.meta-row{display:flex;gap:10px;font-size:13px}
+.meta-row svg{flex:none;margin-top:2px}
+.meta-row b{display:block;font-size:12px;color:var(--muted);font-weight:600}
+.meta-row.avoid{background:var(--warn-soft);border-radius:12px;padding:10px 12px;color:var(--warn)}
+.meta-row.avoid b{color:var(--warn)}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px}
+.copy{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--brand);background:var(--brand-soft);border:none;border-radius:10px;padding:9px 12px;cursor:pointer;white-space:nowrap}
+.votes{display:flex;gap:6px;align-items:center}
+.votes small{font-size:12px;color:var(--muted);margin-right:2px}
+.mini{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--muted);display:grid;place-items:center;cursor:pointer}
+.mini[aria-pressed="true"]{border-color:var(--brand);color:var(--brand);background:var(--brand-soft)}
+.demo-flag{font-size:12px;color:var(--muted);text-align:center;margin:0 0 14px}
+
+.swaps{border:1px solid var(--line);border-radius:20px;padding:18px;margin:8px 0 16px}
+.swaps p{margin:0 0 12px;font-size:13px;color:var(--muted)}
+.swap{display:grid;grid-template-columns:1fr 20px 1.3fr;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.swap s{color:var(--muted);text-decoration-color:var(--err)}
+.swap svg{color:var(--muted)}
+.swap span{font-weight:700}
+
+/* Review */
+.score{display:flex;gap:14px;align-items:center;background:var(--field);border-radius:18px;padding:16px;margin:0 0 18px}
+.ring{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:15px;background:conic-gradient(var(--ok) 0 40%, var(--line) 40% 100%);flex:none;position:relative}
+.ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:var(--field)}
+.ring span{position:relative}
+.score b{display:block;font-size:15px}
+.score small{font-size:13px;color:var(--muted)}
+.checks{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:10px}
+.check{display:grid;grid-template-columns:28px 1fr;gap:10px;border:1px solid var(--line);border-radius:16px;padding:14px}
+.check i{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-style:normal}
+.check.ok i{background:var(--ok-soft);color:var(--ok)}
+.check.fix i{background:var(--fix-soft);color:var(--fix)}
+.check b{display:block;font-size:14px;margin-bottom:2px}
+.check span{font-size:13px;color:var(--muted)}
+.check .st{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.check.ok .st{color:var(--ok)}.check.fix .st{color:var(--fix)}
+.compare{display:grid;gap:10px;margin:0 0 16px}
+.compare .before{background:var(--field);border-radius:14px;padding:14px;font-size:14px;color:var(--muted)}
+.compare .after{background:var(--ok-soft);border-radius:14px;padding:14px;font-size:14px}
+.compare b{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
+.compare .before b{color:var(--muted)}.compare .after b{color:#146B3F}
+
+.toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90%;text-align:center}
+.toast.show{opacity:1}
+/* OTP sign-in */
+.notif{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--field);color:var(--ink);border:none;border-radius:18px;padding:12px 14px;margin:0 0 6px;cursor:pointer}
+.notif .avatar{flex:none}
+.notif-body{min-width:0}
+.notif-body small{display:block;font-size:11px;color:var(--muted);font-weight:600}
+.notif-body b{display:block;font-size:14px}
+.notif-hint{font-size:12px;color:var(--muted);margin:0 0 22px}
+.otp{text-align:center;font-size:28px;font-weight:800;letter-spacing:12px;padding:14px 8px}
+.resend{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13px;color:var(--muted);margin:10px 0 0}
+.resend .text-btn{padding:6px 0}
+.resend .text-btn:disabled{color:var(--muted);cursor:default}
+/* Consent */
+.consent{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:12px}
+.consent li{display:grid;grid-template-columns:32px 1fr;gap:12px;font-size:14px}
+.consent li i{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-style:normal;background:var(--brand-soft);color:var(--brand)}
+.consent li b{display:block;font-size:14px}
+.consent li span{color:var(--muted)}
+.checkrow{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;font-size:14px}
+.checkrow input{width:22px;height:22px;margin:1px 0 0;accent-color:var(--brand);flex:none}
+.checkrow:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+/* Not-saved notice */
+.keep{display:flex;gap:10px;align-items:flex-start;background:var(--warn-soft);color:var(--warn);border-radius:14px;padding:12px 14px;font-size:13px;font-weight:600;margin:0 0 16px}
+.keep svg{flex:none;margin-top:1px}
+
+.done-wrap{text-align:center;padding-top:64px}
+.done-icon{width:84px;height:84px;border-radius:50%;background:var(--ok-soft);color:var(--ok);display:grid;place-items:center;margin:0 auto 22px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- Login -->
+  <section id="s-login" class="screen">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
+      <div class="logo-text">Message Framer Platform<small>by C4C</small></div>
+    </div>
+    <h1>Buat pesan yang didengar. Gerakan yang makin kuat.</h1>
+    <p class="sub">Temukan cara bicara yang paling dekat dengan audiens—agar isu penting tidak berhenti jadi sekadar wacana.</p>
+    <label class="label" for="email">Email organisasi</label>
+    <input class="input" id="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" value="anggota@demo.or.id">
+    <div class="err" id="email-err"></div>
+    <div class="cta"><div class="cta-in">
+      <button class="btn" id="go-check">Kirim kode verifikasi</button>
+      <p class="hint-quota">Kami akan mengirimkan kode 6 digit ke email ini. Tidak perlu kata sandi.</p>
+    </div></div>
+  </section>
+
+  <!-- Check email -->
+  <section id="s-check" class="screen hidden">
+    <div class="bar">
+      <button class="icon-btn" data-go="s-login" aria-label="Ganti email"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="bar-title"></span>
+    </div>
+    <div class="hero-icon" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></div>
+    <h1>Satu langkah lagi</h1>
+    <p class="sub">Jika alamat <b id="email-show" style="color:var(--ink)"></b> terdaftar, kami sudah mengirimkan kode verifikasi. Periksa kotak masuk atau notifikasi emailmu.</p>
+    <button class="notif" id="notif" type="button" aria-label="Contoh notifikasi email. Ketuk untuk mengisi kode">
+      <div class="avatar" aria-hidden="true">P</div>
+      <div class="notif-body"><small>Gmail · baru saja</small><b>Kode verifikasi: 482913</b><small>Pembingkai Pesan · berlaku 10 menit</small></div>
+    </button>
+    <p class="notif-hint">Untuk demo, ketuk notifikasi di atas agar kode terisi otomatis.</p>
+    <label class="label" for="otp">Kode masuk</label>
+    <input class="input otp" id="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">
+    <div class="err" id="otp-err"></div>
+    <div class="resend"><span>Belum menerima email? Periksa folder spam atau promosi.</span><button class="text-btn" id="resend" type="button" disabled>Kirim ulang (60)</button></div>
+    <div class="cta"><div class="cta-in"><button class="btn" id="go-verify">Masuk</button></div></div>
+  </section>
+
+  <!-- Consent (first sign-in only) -->
+  <section id="s-consent" class="screen hidden">
+    <div class="bar"><span class="bar-title"></span></div>
+    <h1>Kenali cara kerja dan privasi datamu</h1>
+    <p class="sub">Sebelum menggunakan platform, luangkan waktu sebentar untuk memahami bagaimana informasi yang kamu masukkan diperlakukan.</p>
+    <ul class="consent">
+      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><div><b>Isi pesanmu tidak disimpan</b><span>Informasi agenda, audiens, dan hasil penyusunan pesan akan terhapus saat halaman ditutup.</span></div></li>
+      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></i><div><b>Data yang kami simpan</b><span>Kami hanya menyimpan alamat email untuk verifikasi anggota dan jumlah penggunaan harian untuk menerapkan batas 10 kali.</span></div></li>
+      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></i><div><b>Bagaimana pesanmu diproses</b><span>Platform menggunakan Claude dari Anthropic untuk membantu menyusun ide pesan. Menurut kebijakan Anthropic yang berlaku untuk layanan ini, data dihapus paling lama dalam 30 hari dan tidak digunakan untuk melatih model AI.</span></div></li>
+      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/></svg></i><div><b>Hindari memasukkan informasi pribadi</b><span>Jangan masukkan nama lengkap, nomor telepon, alamat, atau informasi lain yang dapat mengidentifikasi seseorang.</span></div></li>
+    </ul>
+    <label class="checkrow" for="agree"><input type="checkbox" id="agree"><span>Saya telah membaca dan memahami penjelasan penggunaan data.</span></label>
+    <div class="cta"><div class="cta-in"><button class="btn" id="go-start">Mulai</button></div></div>
+  </section>
+
+  <!-- Home -->
+  <section id="s-home" class="screen hidden">
+    <div class="bar"><span class="bar-title muted-title" id="who"></span><button class="text-btn" data-go="s-login">Keluar</button></div>
+    <h1>Apa yang ingin kamu suarakan hari ini?</h1>
+    <p class="sub">Gagasan utama isu yang kamu perjuangkan dan siapa yang ingin kamu jangkau. Kita susun pesannya dari sana.</p>
+    <div class="modes">
+      <button class="mode" id="go-create">
+        <div class="mode-icon a" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
+        <div><b>Rancang pesan kampanye</b><span>Dapatkan beberapa pendekatan pesan yang bisa kamu kembangkan untuk kanal komunikasi yang berbeda.</span></div>
+        <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+    <div class="tip">
+      <b>Catatan untuk kampanyemu</b>
+      <p>Pesan yang kuat tidak selalu dimulai dari besarnya masalah. Mulailah dari hal yang dekat dengan kehidupan audiens—sesuatu yang mereka rasakan, pikirkan, atau ingin lindungi.</p>
+    </div>
+    <p class="hint-quota" style="margin-top:20px">Sisa kesempatan hari ini: <b id="quota">10</b></p>
+  </section>
+
+  <!-- Create form -->
+  <section id="s-create" class="screen hidden">
+    <div class="bar">
+      <button class="icon-btn" data-go="s-home" aria-label="Kembali"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="bar-title">Rancang pesan kampanye</span>
+    </div>
+    <h1>Mari mulai dari inti kampanyemu</h1>
+    <p class="sub">Jawab lima hal berikut. Tidak perlu merangkai kalimat sempurna—cukup ceritakan konteksnya.</p>
+
+    <p class="q"><span class="num">1</span>Isu apa yang sedang kamu angkat?</p>
+    <p class="q-hint">Pilih isu utama. Kamu juga bisa menuliskan isu yang lebih spesifik.</p>
+    <div class="chips" data-group="topik" role="group" aria-label="Topik">
+      <button class="chip" type="button" aria-pressed="false">Iklim</button>
+      <button class="chip" type="button" aria-pressed="true">Energi</button>
+      <button class="chip" type="button" aria-pressed="false">Demokrasi</button>
+      <button class="chip" type="button" aria-pressed="false">Kesehatan</button>
+      <button class="chip" type="button" aria-pressed="false">Pendidikan</button>
+      <button class="chip" type="button" aria-pressed="false">Kesetaraan gender</button>
+      <button class="chip" type="button" aria-pressed="false">Hak asasi manusia</button>
+      <button class="chip" type="button" aria-pressed="false">Ketenagakerjaan</button>
+      <button class="chip" type="button" aria-pressed="false">Lingkungan hidup</button>
+      <button class="chip" type="button" aria-pressed="false">Pangan dan pertanian</button>
+      <button class="chip" type="button" aria-pressed="false">Transportasi</button>
+      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+    </div>
+    <input class="input option-input" id="topik-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis isu yang ingin kamu angkat. Kamu juga bisa menambahkan konteks di sini.">
+
+    <p class="q"><span class="num">2</span>Apa perubahan yang ingin kamu dorong?</p>
+    <p class="q-hint">Pilih fokus perubahan, lalu jelaskan tujuan kampanyemu dengan bahasamu sendiri.</p>
+    <div class="chips" data-group="fokus" role="group" aria-label="Fokus perubahan">
+      <button class="chip" type="button" aria-pressed="true">Perubahan kebijakan</button>
+      <button class="chip" type="button" aria-pressed="false">Penerapan aturan</button>
+      <button class="chip" type="button" aria-pressed="false">Alokasi anggaran</button>
+      <button class="chip" type="button" aria-pressed="false">Akses layanan publik</button>
+      <button class="chip" type="button" aria-pressed="false">Perlindungan kelompok terdampak</button>
+      <button class="chip" type="button" aria-pressed="false">Perubahan perilaku</button>
+      <button class="chip" type="button" aria-pressed="false">Partisipasi masyarakat</button>
+      <button class="chip" type="button" aria-pressed="false">Transparansi dan akuntabilitas</button>
+      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+    </div>
+    <input class="input option-input" id="fokus-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis fokus perubahan yang kamu inginkan.">
+    <label class="label" for="agenda" style="margin-top:12px">Jelaskan perubahan yang kamu inginkan</label>
+    <textarea class="input" id="agenda" maxlength="600" placeholder="Contoh: Mendorong pemerintah daerah mempercepat peralihan dari PLTU batu bara ke energi surya dengan rencana yang melindungi warga dan pekerja.">Mendorong pemerintah daerah menutup PLTU batu bara lebih cepat dan beralih ke listrik tenaga surya</textarea>
+    <p class="counter"><span id="count">0</span>/600</p>
+    <div class="err" id="agenda-err"></div>
+
+    <p class="q"><span class="num">3</span>Siapa yang ingin kamu jangkau?</p>
+    <p class="q-hint">Pilih kelompok yang paling sesuai atau tuliskan audiens yang lebih spesifik.</p>
+    <div class="profiles" id="profiles" role="group" aria-label="Audiens"></div>
+    <button class="profile other-profile" type="button" id="audience-custom" aria-pressed="false"><b>Lainnya</b><span>Tulis kelompok audiens sendiri</span></button>
+    <div class="insight" id="insight" aria-live="polite"></div>
+    <label class="label" for="audience-other" style="margin-top:12px">Audiens lainnya atau detail tambahan</label>
+    <input class="input other" id="audience-other" type="text" maxlength="200" placeholder="Contoh: guru sekolah dasar di Kupang.">
+    <div class="err" id="audience-err"></div>
+
+    <p class="q"><span class="num">4</span>Apa yang kamu harapkan setelah mereka menerima pesan ini?</p>
+    <p class="q-hint">Pilih hasil yang paling penting. Tambahkan detail jika ada tujuan lain.</p>
+    <div class="chips" data-group="harapan" role="group" aria-label="Harapan">
+      <button class="chip" type="button" aria-pressed="true">Mendukung kebijakan</button>
+      <button class="chip" type="button" aria-pressed="false">Mendorong pejabat bertindak</button>
+      <button class="chip" type="button" aria-pressed="false">Ikut dalam aksi atau kegiatan</button>
+      <button class="chip" type="button" aria-pressed="false">Menandatangani petisi</button>
+      <button class="chip" type="button" aria-pressed="false">Menyebarkan informasi</button>
+      <button class="chip" type="button" aria-pressed="false">Mengubah kebiasaan</button>
+      <button class="chip" type="button" aria-pressed="false">Berdialog dengan komunitas</button>
+      <button class="chip" type="button" aria-pressed="false">Menggalang dukungan</button>
+      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+    </div>
+    <input class="input option-input" id="harapan-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis hasil yang kamu harapkan.">
+
+    <p class="q"><span class="num">5</span>Di mana pesan ini akan disampaikan?</p>
+    <p class="q-hint">Pilih kanal utama. Kamu bisa menambahkan kanal atau format lain.</p>
+    <div class="chips" data-group="lewat" role="group" aria-label="Disampaikan lewat">
+      <button class="chip" type="button" aria-pressed="true" data-tab="wa">WhatsApp</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="ig">Instagram</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="talk">Bicara langsung</button>
+      <button class="chip" type="button" aria-pressed="false">Facebook</button>
+      <button class="chip" type="button" aria-pressed="false">TikTok</button>
+      <button class="chip" type="button" aria-pressed="false">Email atau newsletter</button>
+      <button class="chip" type="button" aria-pressed="false">Media massa</button>
+      <button class="chip" type="button" aria-pressed="false">Pertemuan komunitas</button>
+      <button class="chip" type="button" aria-pressed="false">Poster atau materi cetak</button>
+      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+    </div>
+    <input class="input option-input" id="lewat-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis kanal atau format yang kamu gunakan.">
+
+    <div class="note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      <span>Informasi yang kamu masukkan tidak disimpan. Untuk menjaga privasi, hindari mencantumkan data pribadi.</span>
+    </div>
+    <div class="cta"><div class="cta-in"><button class="btn" id="run-create">Susun pendekatan pesan</button></div></div>
+  </section>
+
+  <!-- Loading -->
+  <section id="s-loading" class="screen hidden">
+    <div class="bar"><span class="bar-title"></span></div>
+    <h1 id="load-title">Merancang pendekatan kampanye</h1>
+    <p class="sub">Kami sedang mencari sudut pandang yang paling relevan untuk audiensmu.</p>
+    <ul class="loading-steps">
+      <li id="ls1"><i></i><span></span></li>
+      <li id="ls2"><i></i><span></span></li>
+      <li id="ls3"><i></i><span></span></li>
+    </ul>
+    <div class="skeleton"></div><div class="skeleton"></div>
+  </section>
+
+  <!-- Create results -->
+  <section id="s-results" class="screen hidden">
+    <div class="bar">
+      <button class="icon-btn" data-go="s-create" aria-label="Ubah jawaban"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="bar-title">Arah pesan kampanyemu</span>
+    </div>
+    <h1>Tiga pendekatan untuk satu tujuan</h1>
+    <p class="sub">Setiap pendekatan membawa sudut pandang yang berbeda. Pilih yang paling sesuai dengan tujuan dan karakter audiensmu, lalu sesuaikan dengan konteks kampanye.</p>
+    <div class="keep" role="note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17.5v.5"/></svg><span>Hasil hanya tersedia selama halaman ini terbuka. Salin naskah yang ingin kamu gunakan sebelum meninggalkan halaman.</span></div>
+    <div class="context" id="context"></div>
+    <p class="demo-flag">Contoh hasil untuk kebutuhan demo</p>
+    <div id="cards"></div>
+    <div class="swaps" id="swaps-create"></div>
+    <div class="cta"><div class="cta-in row">
+      <button class="btn ghost" id="copy-all">Salin semua</button>
+      <button class="btn" data-go="s-done">Sampai di sini dulu</button>
+    </div></div>
+  </section>
+
+  <!-- Daily limit -->
+  <section id="s-limit" class="screen hidden">
+    <div class="done-wrap">
+      <div class="hero-icon" style="margin:0 auto 22px" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+      <h1>Kamu sudah menggunakan seluruh kesempatan hari ini</h1>
+      <p class="sub">Kesempatan menyusun pesan akan tersedia kembali mulai pukul 00.00 WIB. Jika perlu akses tambahan, silakan hubungi pengelola organisasimu.</p>
+    </div>
+    <div class="cta"><div class="cta-in">
+      <button class="btn" data-go="s-home">Kembali ke beranda</button>
+      <button class="btn ghost" id="restart-limit">Ulangi demo</button>
+    </div></div>
+  </section>
+
+  <!-- Done -->
+  <section id="s-done" class="screen hidden">
+    <div class="done-wrap">
+      <div class="done-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h1>Sampai di sini dulu</h1>
+      <p class="sub">Sesi ini telah berakhir dan informasi yang kamu masukkan tidak disimpan. Semoga pesanmu membantu membawa perubahan yang kamu perjuangkan.</p>
+    </div>
+    <div class="cta"><div class="cta-in">
+      <button class="btn" data-go="s-home">Kembali ke beranda</button>
+      <button class="btn ghost" id="restart">Ulangi demo</button>
+    </div></div>
+  </section>
+
+  <div class="toast" id="toast" role="status"><span id="toast-text"></span></div>
+</div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  var SCREENS=["s-login","s-check","s-consent","s-home","s-create","s-loading","s-results","s-limit","s-done"];
+  var quota=10, toastTimer, activeTab="wa", consented=false, current="s-login", resendTimer, CODE="482913";
+  var I={
+    user:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>',
+    bulb:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2z"/></svg>',
+    warn:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17.5v.5"/></svg>',
+    copy:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/></svg>',
+    up:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11v10H4V11h3zM7 11l4-8a2 2 0 0 1 3 2l-1 5h6a2 2 0 0 1 2 2.3l-1.4 7A2 2 0 0 1 17.6 21H7"/></svg>',
+    down:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 13V3h3v10h-3zM17 13l-4 8a2 2 0 0 1-3-2l1-5H5a2 2 0 0 1-2-2.3l1.4-7A2 2 0 0 1 6.4 3H17"/></svg>',
+    star:'<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3 7 7 .6-5.3 4.7 1.6 7.2L12 17.8 5.7 21.5l1.6-7.2L2 9.6 9 9z"/></svg>',
+    check:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+    fix:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v6M12 17v.5"/></svg>',
+    arrow:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+  };
+
+  var PROFILES=[
+    {name:"Pemuka agama dan komunitasnya",care:"Amanah, masa depan keluarga, dan tanggung jawab bersama",trust:"Pemuka agama yang mereka kenal dan teladan di lingkungan sendiri",away:"Bahasa teknis atau pesan yang terasa menyudutkan"},
+    {name:"Pejabat daerah dan anggota DPRD",care:"Dampak kebijakan bagi warga, ekonomi daerah, dan hasil kerja yang terlihat",trust:"Data lokal yang kuat, masukan konstituen, dan pandangan tokoh daerah",away:"Serangan personal atau tuntutan tanpa usulan yang bisa dijalankan"},
+    {name:"Ibu dan pengelola rumah tangga",care:"Kesehatan keluarga, biaya hidup, dan kebutuhan sehari-hari",trust:"Tenaga kesehatan, keluarga, dan komunitas sekitar",away:"Angka yang sulit dipahami atau isu yang terasa jauh dari rumah"},
+    {name:"Anak muda perkotaan",care:"Kesempatan kerja, masa depan, ruang berekspresi, dan keadilan",trust:"Teman sebaya, komunitas, serta kreator yang mereka ikuti",away:"Nada menggurui, jargon, dan ajakan yang terasa dibuat-buat"},
+    {name:"Pelaku usaha lokal",care:"Biaya operasional, kepastian aturan, dan peluang untuk berkembang",trust:"Asosiasi usaha, rekan bisnis, dan contoh nyata dari pelaku usaha lain",away:"Pesan yang mengabaikan dampak ekonomi atau terkesan anti-usaha"},
+    {name:"Petani dan nelayan",care:"Penghasilan, hasil panen atau tangkapan, perubahan cuaca, dan keberlanjutan usaha",trust:"Penyuluh, kelompok tani atau nelayan, dan tokoh desa",away:"Istilah rumit dan janji yang tidak menjawab kebutuhan mereka"},
+    {name:"Pekerja dan serikat pekerja",care:"Kepastian kerja, upah, keselamatan, dan perlindungan hak",trust:"Rekan kerja, serikat pekerja, dan pendamping ketenagakerjaan",away:"Pesan yang mengabaikan dampak kebijakan terhadap penghidupan"},
+    {name:"Guru, dosen, dan tenaga pendidikan",care:"Kualitas pendidikan, kesejahteraan, dan masa depan peserta didik",trust:"Rekan pendidik, organisasi profesi, dan komunitas sekolah",away:"Klaim tanpa bukti atau kebijakan yang tidak memahami kondisi lapangan"},
+    {name:"Tenaga kesehatan",care:"Keselamatan pasien, kualitas layanan, dan kondisi fasilitas kesehatan",trust:"Organisasi profesi, tenaga ahli, dan pengalaman layanan setempat",away:"Informasi kesehatan yang tidak akurat atau menimbulkan kepanikan"},
+    {name:"Warga di sekitar wilayah terdampak",care:"Kesehatan, lingkungan, akses layanan, dan ruang untuk menyampaikan aspirasi",trust:"Tokoh lokal, kelompok warga, dan pengalaman langsung masyarakat",away:"Janji dari pihak luar yang tidak memahami situasi setempat"},
+    {name:"Jurnalis dan media",care:"Fakta yang terverifikasi, kepentingan publik, dan narasumber yang kredibel",trust:"Dokumen, data terbuka, pakar, dan sumber primer",away:"Informasi yang tidak jelas sumbernya atau klaim berlebihan"},
+    {name:"Organisasi masyarakat sipil",care:"Dampak sosial, keadilan, partisipasi, dan perubahan sistemik",trust:"Bukti lapangan, jaringan organisasi, dan komunitas terdampak",away:"Ajakan yang tidak jelas tujuan atau pembagian perannya"}
+  ];
+
+  var FRAMES=[
+    {nilai:"Amanah merawat bumi",judul:"Apa yang kita jaga hari ini, akan dirasakan anak cucu nanti",
+     why_top:"Pendekatan ini menghubungkan isu energi dengan nilai tanggung jawab antargenerasi yang dekat dengan komunitas keagamaan.",
+     v:"Menjaga alam bukan hanya soal hari ini. Ini tentang lingkungan yang akan kita tinggalkan untuk anak cucu.",
+     p:"Di sekitar kita, aktivitas PLTU batu bara menjadi salah satu sumber polusi udara yang perlu mendapat perhatian.",
+     s:"Peralihan ke energi surya dapat menjadi bagian dari solusi, dengan perencanaan yang matang dan sesuai kebutuhan daerah.",
+     a:"Dorong pemerintah daerah membuka pembahasan yang serius tentang percepatan peralihan dari PLTU ke energi yang lebih bersih.",
+     wa:"Bapak dan Ibu yang kami hormati,\n\nKita tentu ingin anak cucu tumbuh di lingkungan yang sehat. Karena itu, menjaga alam tidak cukup hanya menjadi nasihat. Kita perlu mendukung langkah nyata bersama.\n\nSalah satu hal yang perlu kita bicarakan adalah sumber listrik yang kita gunakan. Ketergantungan pada batu bara membawa dampak polusi yang perlu ditangani, sementara energi surya bisa menjadi salah satu pilihan untuk masa depan.\n\nMari dorong pemerintah daerah membahas langkah peralihan menuju energi yang lebih bersih, dengan rencana yang jelas dan berpihak pada warga.",
+     ig:"Lingkungan yang sehat bukan hadiah untuk anak cucu. Itu tanggung jawab yang kita mulai hari ini.\n\nSudah waktunya kita membicarakan masa depan energi daerah: mengurangi ketergantungan pada batu bara dan membuka lebih banyak ruang bagi energi surya.\n\nJaga bumi, mulai dari keputusan yang kita dukung hari ini.\n\n#EnergiBersih #UntukAnakCucu",
+     alasan:"Nilai menjaga titipan dan tanggung jawab antargenerasi memberi landasan yang kuat tanpa membuat pesan terasa seperti ceramah atau slogan politik.",
+     penyampai:"Pemuka agama atau tokoh komunitas yang dipercaya warga",
+     hindari:"Menggunakan ayat atau ajaran agama di luar konteks, serta menyampaikan klaim dampak lingkungan tanpa sumber yang jelas."},
+    {nilai:"Kesehatan dan kehidupan sehari-hari",judul:"Udara yang lebih bersih dimulai dari pilihan energi",
+     v:"Setiap keluarga berhak hidup di lingkungan dengan udara yang bersih dan sehat.",
+     p:"Polusi dari pembangkit berbahan bakar batu bara menjadi perhatian, terutama bagi masyarakat yang tinggal di sekitarnya.",
+     s:"Mengembangkan energi yang lebih bersih, termasuk tenaga surya, merupakan salah satu langkah untuk mengurangi ketergantungan pada batu bara.",
+     a:"Ajak warga meminta pemerintah daerah menjelaskan rencana dan target peralihan menuju energi yang lebih bersih.",
+     wa:"Bapak dan Ibu,\n\nUrusan udara bersih bukan isu yang jauh dari kehidupan kita. Ini berkaitan dengan lingkungan tempat anak-anak bermain, tempat kita bekerja, dan tempat keluarga beraktivitas setiap hari.\n\nKarena itu, pilihan sumber energi perlu ikut menjadi perhatian. Kita bisa mulai dengan mendorong penggunaan energi yang lebih bersih dan mengurangi ketergantungan pada batu bara.\n\nMari minta pemerintah daerah menyampaikan rencana yang jelas: apa langkahnya, kapan dimulai, dan bagaimana warga akan dilibatkan.",
+     ig:"Udara bersih seharusnya jadi bagian dari keseharian, bukan sesuatu yang harus kita perjuangkan setelah masalah datang.\n\nPilihan energi ikut menentukan lingkungan tempat keluarga kita hidup. Saatnya mendorong langkah nyata menuju sumber listrik yang lebih bersih.\n\nMulai dari bertanya. Lanjutkan dengan ikut mengawal.\n\n#UdaraBersih #EnergiBersih",
+     alasan:"Pendekatan ini membawa isu energi ke pengalaman sehari-hari. Pesan tidak menakut-nakuti, tetapi mengajak audiens melihat alasan praktis untuk peduli.",
+     penyampai:"Tenaga kesehatan, kader lingkungan, atau tokoh warga yang memahami kondisi setempat",
+     hindari:"Mengaitkan penyakit tertentu secara langsung dengan PLTU tanpa bukti dan data kesehatan yang dapat dipertanggungjawabkan."},
+    {nilai:"Perubahan yang adil bagi semua",judul:"Energi boleh berubah. Penghidupan warga harus tetap terjaga.",
+     v:"Perubahan besar tidak boleh membuat orang-orang yang paling terdampak menanggung bebannya sendiri.",
+     p:"Pekerja PLTU dan keluarga yang menggantungkan penghasilan pada industri ini punya alasan untuk khawatir ketika rencana penutupan dibicarakan.",
+     s:"Peralihan yang adil perlu disertai dialog sejak awal, perlindungan bagi pekerja, dan akses ke pelatihan serta peluang kerja baru.",
+     a:"Dorong pemerintah daerah melibatkan pekerja dan masyarakat dalam menyusun rencana peralihan yang melindungi penghidupan mereka.",
+     wa:"Bapak dan Ibu,\n\nKita bisa sepakat bahwa masa depan energi perlu lebih bersih. Tapi ada satu hal yang tidak boleh dilupakan: di balik PLTU, ada pekerja dan keluarga yang menggantungkan hidup pada pekerjaan mereka.\n\nKarena itu, perubahan tidak cukup hanya bicara soal kapan PLTU ditutup. Pemerintah juga perlu menyiapkan perlindungan bagi pekerja, pelatihan yang relevan, dan kesempatan kerja baru. Mereka yang terdampak harus dilibatkan sejak awal.\n\nMari dorong proses peralihan yang tidak meninggalkan siapa pun di belakang.",
+     ig:"Masa depan energi yang lebih bersih harus berjalan beriringan dengan masa depan pekerjanya.\n\nDi balik setiap rencana perubahan, ada keluarga yang membutuhkan kepastian. Karena itu, pekerja harus didengar, dilibatkan, dan mendapat akses ke pelatihan serta peluang kerja baru.\n\nPerubahan yang baik adalah perubahan yang adil.\n\n#TransisiAdil #PekerjaJugaPenting",
+     alasan:"Pendekatan ini mengakui kekhawatiran pekerja, sehingga ajakan perubahan terasa lebih realistis dan tidak mengabaikan orang-orang yang terdampak langsung.",
+     penyampai:"Perwakilan pekerja, tokoh masyarakat, dan pemangku kebijakan daerah",
+     hindari:"Menggambarkan pekerja sebagai penghambat perubahan atau menjanjikan pekerjaan pengganti tanpa rencana yang konkret."}
+  ];
+  var SWAPS=[["Dekarbonisasi","Mengurangi penggunaan energi dari bahan bakar fosil"],["Emisi","Gas pencemar yang dilepaskan ke udara"],["Transisi energi","Peralihan menuju sumber energi yang lebih bersih"],["Krisis iklim","Perubahan iklim dan dampaknya"],["NZE 2060","Target mencapai emisi nol bersih pada 2060"]];
+  var TABS=[["card","Ringkas"],["wa","WhatsApp"],["ig","Instagram"],["talk","Bahan bicara"]];
+  var COPY_LABEL={card:"Salin ringkasan",wa:"Salin untuk WA",ig:"Salin untuk IG",talk:"Salin bahan bicara"};
+
+  function go(id){current=id;SCREENS.forEach(function(s){$(s).classList.toggle("hidden",s!==id);});window.scrollTo(0,0);}
+  function setErr(input,id,t){$(id).textContent=t;if(input)$(input).classList.toggle("bad",!!t);}
+  function toast(t){$("toast-text").textContent=t;$("toast").classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){$("toast").classList.remove("show");},1800);}
+  function copy(text,msg){
+    var fb=function(){var t=document.createElement("textarea");t.value=text;t.style.position="absolute";t.style.left="-9999px";document.body.appendChild(t);t.select();try{document.execCommand("copy");}catch(e){}document.body.removeChild(t);toast(msg);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast(msg);},fb);}else{fb();}
+  }
+  function picked(group){return document.querySelector('[data-group="'+group+'"] [aria-pressed="true"]');}
+  function fieldValue(group,otherId){var choice=picked(group);var extra=$(otherId).value.trim();var label=choice?choice.textContent.trim():"";return extra?(label&&label!=="Lainnya"?label+". "+extra:extra):(label||"Belum ditentukan");}
+  function talkText(f){return "• Gagasan utama: "+f.v+"\n• Konteks: "+f.p+"\n• Arah perubahan: "+f.s+"\n• Ajakan bertindak: "+f.a;}
+  function textFor(f,tab){
+    if(tab==="wa")return f.wa; if(tab==="ig")return f.ig; if(tab==="talk")return talkText(f);
+    return f.judul+"\nGagasan utama: "+f.v+"\nKonteks: "+f.p+"\nArah perubahan: "+f.s+"\nAjakan bertindak: "+f.a;
+  }
+  function renderSwaps(id){
+    var box=$(id);
+    box.innerHTML='<h3>Pilih bahasa yang lebih membumi</h3><p>Gunakan istilah yang akrab bagi audiens, tanpa menghilangkan makna yang ingin disampaikan.</p>';
+    SWAPS.forEach(function(s){
+      var row=document.createElement("div");row.className="swap";
+      row.innerHTML='<s></s>'+I.arrow+'<span></span>';
+      row.querySelector("s").textContent=s[0];row.querySelector("span").textContent=s[1];
+      box.appendChild(row);
+    });
+  }
+
+  // chip groups: single choice
+  document.querySelectorAll("[data-group]").forEach(function(g){
+    g.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){g.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed","false");});c.setAttribute("aria-pressed","true");};});
+  });
+
+  // audience profiles + insight panel
+  var selected=0;
+  function renderInsight(){
+    var box=$("insight");
+    if(selected<0){box.classList.add("hidden");return;}
+    var p=PROFILES[selected];box.classList.remove("hidden");
+    box.innerHTML='<p class="insight-title">'+I.bulb+'<span>Hal yang perlu dipertimbangkan</span></p><dl><div><dt>Hal yang dekat dengan mereka</dt><dd class="c"></dd></div><div><dt>Sumber yang mereka percaya</dt><dd class="t"></dd></div><div><dt>Hal yang berisiko membuat mereka tidak tertarik</dt><dd class="a"></dd></div></dl><small>Ini gambaran umum. Kenali konteks lokal sebelum menggunakannya sebagai dasar pesan.</small>';
+    box.querySelector(".c").textContent=p.care;box.querySelector(".t").textContent=p.trust;box.querySelector(".a").textContent=p.away;
+  }
+  PROFILES.forEach(function(p,i){
+    var b=document.createElement("button");b.type="button";b.className="profile";b.innerHTML="<b></b>";b.querySelector("b").textContent=p.name;
+    b.setAttribute("aria-pressed",i===selected?"true":"false");
+    b.onclick=function(){
+      selected=(selected===i)?-1:i;
+      document.querySelectorAll(".profile").forEach(function(x,j){x.setAttribute("aria-pressed",j===selected?"true":"false");});
+      if(selected>=0){$("audience-other").value="";$("audience-custom").setAttribute("aria-pressed","false");}
+      renderInsight();setErr("audience-other","audience-err","");
+    };
+    $("profiles").appendChild(b);
+  });
+  $("audience-custom").onclick=function(){
+    selected=-1;
+    document.querySelectorAll("#profiles .profile").forEach(function(x){x.setAttribute("aria-pressed","false");});
+    this.setAttribute("aria-pressed","true");
+    renderInsight();
+    $("audience-other").focus();
+  };
+  $("audience-other").oninput=function(){
+    if(this.value.trim()){selected=-1;document.querySelectorAll("#profiles .profile").forEach(function(x){x.setAttribute("aria-pressed","false");});$("audience-custom").setAttribute("aria-pressed","true");renderInsight();}
+    setErr("audience-other","audience-err","");
+  };
+  function audience(){var o=$("audience-other").value.trim();return o||(selected>=0?PROFILES[selected].name:"");}
+
+  function renderCards(){
+    var box=$("cards");box.innerHTML="";
+    FRAMES.forEach(function(f,i){
+      var el=document.createElement("article");el.className="card"+(i===0?" top":"");
+      var tabs=TABS.map(function(t){return '<button class="tab" role="tab" type="button" data-tab="'+t[0]+'">'+t[1]+'</button>';}).join("");
+      el.innerHTML=(i===0?'<span class="badge">'+I.star+'Pendekatan utama</span><p class="badge-why"></p>':'')+
+        '<span class="tag tone-'+(i+1)+'"></span><h2></h2>'+
+        '<div class="tabs" role="tablist" aria-label="Pilih versi">'+tabs+'</div>'+
+        '<ol class="flow"><li><i>1</i><div><b>Gagasan utama</b><span class="fv"></span></div></li><li><i>2</i><div><b>Konteks</b><span class="fp"></span></div></li><li><i>3</i><div><b>Arah perubahan</b><span class="fs"></span></div></li><li><i>4</i><div><b>Ajakan bertindak</b><span class="fa"></span></div></li></ol>'+
+        '<div class="out"></div>'+
+        '<div class="meta"><div class="meta-row">'+I.bulb+'<div><b>Mengapa pendekatan ini relevan</b><span class="m-why"></span></div></div>'+
+        '<div class="meta-row">'+I.user+'<div><b>Siapa yang tepat menyampaikan</b><span class="m-who"></span></div></div>'+
+        '<div class="meta-row avoid">'+I.warn+'<div><b>Hal yang perlu dihindari</b><span class="m-avoid"></span></div></div></div>'+
+        '<div class="card-foot"><button class="copy" type="button">'+I.copy+'<span></span></button></div>';
+      if(i===0)el.querySelector(".badge-why").textContent=f.why_top;
+      el.querySelector(".tag").textContent=f.nilai;el.querySelector("h2").textContent=f.judul;
+      el.querySelector(".fv").textContent=f.v;el.querySelector(".fp").textContent=f.p;el.querySelector(".fs").textContent=f.s;el.querySelector(".fa").textContent=f.a;
+      el.querySelector(".m-why").textContent=f.alasan;el.querySelector(".m-who").textContent=f.penyampai;el.querySelector(".m-avoid").textContent=f.hindari;
+      var out=el.querySelector(".out"),flow=el.querySelector(".flow"),label=el.querySelector(".copy span"),current;
+      function show(tab){
+        current=tab;
+        el.querySelectorAll(".tab").forEach(function(t){t.setAttribute("aria-selected",t.getAttribute("data-tab")===tab?"true":"false");});
+        flow.classList.toggle("hidden",tab!=="card");out.classList.toggle("hidden",tab==="card");
+        out.textContent=tab==="card"?"":textFor(f,tab);label.textContent=COPY_LABEL[tab];
+      }
+      el.querySelectorAll(".tab").forEach(function(t){t.onclick=function(){show(t.getAttribute("data-tab"));};});
+      el.querySelector(".copy").onclick=function(){copy(textFor(f,current),"Teks berhasil disalin");};
+      show(activeTab);box.appendChild(el);
+    });
+  }
+
+  function runLoading(title,steps,next){
+    $("load-title").textContent=title;
+    ["ls1","ls2","ls3"].forEach(function(id,i){$(id).classList.remove("done");$(id).querySelector("span").textContent=steps[i];});
+    go("s-loading");
+    setTimeout(function(){$("ls1").classList.add("done");},500);
+    setTimeout(function(){$("ls2").classList.add("done");},1100);
+    setTimeout(function(){$("ls3").classList.add("done");},1700);
+    setTimeout(function(){quota=Math.max(1,quota-1);$("quota").textContent=quota;next();},2200);
+  }
+
+  // navigation
+  document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){go(b.getAttribute("data-go"));};});
+  $("email").oninput=function(){setErr("email","email-err","");};
+  $("go-check").onclick=function(){
+    var e=$("email").value.trim();
+    if(!e){e="anggota@demo.or.id";$("email").value=e;}
+    $("email-show").textContent=e;$("otp").value="";setErr("otp","otp-err","");startResend();go("s-check");
+  };
+  function startResend(){
+    var n=60,b=$("resend");b.disabled=true;b.textContent="Kirim ulang ("+n+")";clearInterval(resendTimer);
+    resendTimer=setInterval(function(){n--;if(n<=0){clearInterval(resendTimer);b.disabled=false;b.textContent="Kirim ulang kode";}else{b.textContent="Kirim ulang ("+n+")";}},1000);
+  }
+  $("resend").onclick=function(){startResend();toast("Kode baru sudah kami kirim");};
+  $("notif").onclick=function(){$("otp").value=CODE;setErr("otp","otp-err","");};
+  $("otp").oninput=function(){this.value=this.value.replace(/\D/g,"").slice(0,6);setErr("otp","otp-err","");};
+  $("go-verify").onclick=function(){
+    if(!$("otp").value)$("otp").value=CODE;
+    clearInterval(resendTimer);$("who").textContent=$("email").value.trim();
+    go(consented?"s-home":"s-consent");
+  };
+  $("go-start").onclick=function(){$("agree").checked=true;consented=true;go("s-home");};
+  $("go-create").onclick=function(){updateCount();go("s-create");};
+  function updateCount(){$("count").textContent=$("agenda").value.length;}
+  $("agenda").oninput=function(){updateCount();setErr("agenda","agenda-err","");};
+  ["topik-other","fokus-other","harapan-other","lewat-other"].forEach(function(id){$(id).oninput=function(){};});
+
+  $("run-create").onclick=function(){
+    var ag=$("agenda").value.trim()||"Mendorong pemerintah daerah beralih ke listrik tenaga surya",au=audience()||PROFILES[0].name;
+    var lw=picked("lewat");activeTab=(lw&&lw.getAttribute("data-tab"))||"wa";
+    var rows=[["Topik",fieldValue("topik","topik-other")],["Fokus perubahan",fieldValue("fokus","fokus-other")],["Agenda",ag],["Audiens",au],["Harapan",fieldValue("harapan","harapan-other")],["Kanal",fieldValue("lewat","lewat-other")]];
+    var ctx=$("context");ctx.innerHTML="";
+    rows.forEach(function(r){var b=document.createElement("b");b.textContent=r[0];var s=document.createElement("span");s.textContent=r[1];ctx.appendChild(b);ctx.appendChild(s);});
+    runLoading("Merancang pendekatan kampanye",["Memahami isu dan tujuan kampanyemu","Menentukan sudut pandang yang relevan bagi audiens","Menyiapkan versi pesan untuk "+lw.textContent],function(){renderCards();renderSwaps("swaps-create");go("s-results");});
+  };
+  $("copy-all").onclick=function(){copy(FRAMES.map(function(f){return textFor(f,activeTab);}).join("\n\n———\n\n"),"Semua pendekatan berhasil disalin");};
+  $("restart").onclick=function(){location.reload();};
+  $("restart-limit").onclick=function(){location.reload();};
+  // Warn before leaving while results are on screen (where the browser allows it)
+  window.addEventListener("beforeunload",function(e){if(current==="s-results"){e.preventDefault();e.returnValue="";}});
+
+  renderInsight();updateCount();go("s-login");
+})();
+</script>
+</body>
+</html>
