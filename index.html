@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root{
   --bg:#FFFFFF; --app:#F4F4F8; --ink:#14142B; --muted:#6B6B80; --line:#E6E6EE; --field:#F4F4F8;
@@ -36,7 +37,23 @@ button{font:inherit}
 .text-btn{border:none;background:none;color:var(--brand);font-weight:700;font-size:14px;padding:8px 10px;cursor:pointer}
 
 .logo{display:flex;align-items:center;gap:10px;padding:28px 0 40px}
-.logo-mark{width:36px;height:36px;border-radius:11px;background:var(--brand);display:grid;place-items:center}
+.logo-mark{width:40px;height:40px;border-radius:13px;background:var(--brand);display:grid;place-items:center;color:#fff;box-shadow:0 5px 14px rgba(74,53,232,.20)}
+.logo-mark i{width:22px;height:22px;stroke-width:2.2}
+.ui-icon{width:18px;height:18px;stroke-width:2;flex:none}
+.mode-icon .ui-icon{width:23px;height:23px;stroke-width:2}
+.choice-icon{display:inline-flex;align-items:center;justify-content:center;width:19px;height:19px;margin-right:7px;vertical-align:-4px;color:var(--brand)}
+.choice-icon .ui-icon{width:17px;height:17px}
+.profile{display:flex;align-items:flex-start;gap:9px;min-height:66px}
+.profile .profile-icon{width:30px;height:30px;border-radius:9px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
+.profile .profile-icon .ui-icon{width:17px;height:17px}
+.profile b{padding-top:4px}
+.card-heading{display:flex;align-items:flex-start;gap:9px;margin:0 0 12px}
+.card-heading .theme-icon{width:34px;height:34px;border-radius:11px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;flex:none}
+.card-heading .theme-icon .ui-icon{width:19px;height:19px}
+.card-heading h2{margin:2px 0 0;flex:1}
+.tab{display:flex;align-items:center;justify-content:center;gap:5px}
+.tab .ui-icon{width:14px;height:14px}
+.bar .ui-icon{width:19px;height:19px}
 .logo-text{font-weight:800;font-size:17px;letter-spacing:-0.02em}
 .logo-text small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
 
@@ -57,7 +74,7 @@ textarea.input.tall{min-height:150px}
 .counter{font-size:12px;color:var(--muted);text-align:right;margin:-2px 0 0}
 
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-size:14px;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.chip{display:inline-flex;align-items:center;font-size:14px;font-weight:600;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--brand);color:var(--brand)}
 
 .profiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -65,12 +82,6 @@ textarea.input.tall{min-height:150px}
 .profile b{display:block;font-size:14px;line-height:1.3}
 .profile[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
 .other{margin-top:10px}
-.other-profile{grid-column:1 / -1;text-align:left;margin-top:2px}
-.other-profile span{display:block;font-size:12px;color:var(--muted);margin-top:3px}
-.other-profile[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);color:var(--brand)}
-.field-help{font-size:12px;color:var(--muted);margin:9px 0 5px}
-.option-input{margin-top:10px}
-.option-input::placeholder{color:#85859A}
 
 .insight{background:var(--brand-soft);border-radius:16px;padding:14px 16px;margin:12px 0 0}
 .insight-title{font-size:13px;font-weight:800;color:var(--brand);margin:0 0 10px;display:flex;gap:8px;align-items:center}
@@ -227,7 +238,7 @@ textarea.input.tall{min-height:150px}
   <!-- Login -->
   <section id="s-login" class="screen">
     <div class="logo">
-      <div class="logo-mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></div>
+      <div class="logo-mark" aria-hidden="true"><i data-lucide="messages-square"></i></div>
       <div class="logo-text">Message Framer Platform<small>by C4C</small></div>
     </div>
     <h1>Buat pesan yang didengar. Gerakan yang makin kuat.</h1>
@@ -284,7 +295,7 @@ textarea.input.tall{min-height:150px}
     <p class="sub">Gagasan utama isu yang kamu perjuangkan dan siapa yang ingin kamu jangkau. Kita susun pesannya dari sana.</p>
     <div class="modes">
       <button class="mode" id="go-create">
-        <div class="mode-icon a" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></div>
+        <div class="mode-icon a" aria-hidden="true"><i class="ui-icon" data-lucide="message-square-text"></i></div>
         <div><b>Rancang pesan kampanye</b><span>Dapatkan beberapa pendekatan pesan yang bisa kamu kembangkan untuk kanal komunikasi yang berbeda.</span></div>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       </button>
@@ -306,81 +317,39 @@ textarea.input.tall{min-height:150px}
     <p class="sub">Jawab lima hal berikut. Tidak perlu merangkai kalimat sempurna—cukup ceritakan konteksnya.</p>
 
     <p class="q"><span class="num">1</span>Isu apa yang sedang kamu angkat?</p>
-    <p class="q-hint">Pilih isu utama. Kamu juga bisa menuliskan isu yang lebih spesifik.</p>
     <div class="chips" data-group="topik" role="group" aria-label="Topik">
-      <button class="chip" type="button" aria-pressed="false">Iklim</button>
-      <button class="chip" type="button" aria-pressed="true">Energi</button>
-      <button class="chip" type="button" aria-pressed="false">Demokrasi</button>
-      <button class="chip" type="button" aria-pressed="false">Kesehatan</button>
-      <button class="chip" type="button" aria-pressed="false">Pendidikan</button>
-      <button class="chip" type="button" aria-pressed="false">Kesetaraan gender</button>
-      <button class="chip" type="button" aria-pressed="false">Hak asasi manusia</button>
-      <button class="chip" type="button" aria-pressed="false">Ketenagakerjaan</button>
-      <button class="chip" type="button" aria-pressed="false">Lingkungan hidup</button>
-      <button class="chip" type="button" aria-pressed="false">Pangan dan pertanian</button>
-      <button class="chip" type="button" aria-pressed="false">Transportasi</button>
-      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+      <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="cloud-sun"></i></span>Iklim</button>
+      <button class="chip" type="button" aria-pressed="true"><span class="choice-icon"><i class="ui-icon" data-lucide="zap"></i></span>Energi</button>
+      <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="landmark"></i></span>Demokrasi</button>
     </div>
-    <input class="input option-input" id="topik-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis isu yang ingin kamu angkat. Kamu juga bisa menambahkan konteks di sini.">
 
     <p class="q"><span class="num">2</span>Apa perubahan yang ingin kamu dorong?</p>
-    <p class="q-hint">Pilih fokus perubahan, lalu jelaskan tujuan kampanyemu dengan bahasamu sendiri.</p>
-    <div class="chips" data-group="fokus" role="group" aria-label="Fokus perubahan">
-      <button class="chip" type="button" aria-pressed="true">Perubahan kebijakan</button>
-      <button class="chip" type="button" aria-pressed="false">Penerapan aturan</button>
-      <button class="chip" type="button" aria-pressed="false">Alokasi anggaran</button>
-      <button class="chip" type="button" aria-pressed="false">Akses layanan publik</button>
-      <button class="chip" type="button" aria-pressed="false">Perlindungan kelompok terdampak</button>
-      <button class="chip" type="button" aria-pressed="false">Perubahan perilaku</button>
-      <button class="chip" type="button" aria-pressed="false">Partisipasi masyarakat</button>
-      <button class="chip" type="button" aria-pressed="false">Transparansi dan akuntabilitas</button>
-      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
-    </div>
-    <input class="input option-input" id="fokus-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis fokus perubahan yang kamu inginkan.">
-    <label class="label" for="agenda" style="margin-top:12px">Jelaskan perubahan yang kamu inginkan</label>
-    <textarea class="input" id="agenda" maxlength="600" placeholder="Contoh: Mendorong pemerintah daerah mempercepat peralihan dari PLTU batu bara ke energi surya dengan rencana yang melindungi warga dan pekerja.">Mendorong pemerintah daerah menutup PLTU batu bara lebih cepat dan beralih ke listrik tenaga surya</textarea>
+    <p class="q-hint">Ceritakan tujuan kampanyemu secara langsung. Apa yang perlu berubah, dan siapa yang punya peran?</p>
+    <textarea class="input" id="agenda" maxlength="600">Mendorong pemerintah daerah menutup PLTU batu bara lebih cepat dan beralih ke listrik tenaga surya</textarea>
     <p class="counter"><span id="count">0</span>/600</p>
     <div class="err" id="agenda-err"></div>
 
     <p class="q"><span class="num">3</span>Siapa yang ingin kamu jangkau?</p>
-    <p class="q-hint">Pilih kelompok yang paling sesuai atau tuliskan audiens yang lebih spesifik.</p>
+    <p class="q-hint">Pilih kelompok yang paling sesuai atau masukkan audiensmu sendiri.</p>
     <div class="profiles" id="profiles" role="group" aria-label="Audiens"></div>
-    <button class="profile other-profile" type="button" id="audience-custom" aria-pressed="false"><b>Lainnya</b><span>Tulis kelompok audiens sendiri</span></button>
     <div class="insight" id="insight" aria-live="polite"></div>
-    <label class="label" for="audience-other" style="margin-top:12px">Audiens lainnya atau detail tambahan</label>
-    <input class="input other" id="audience-other" type="text" maxlength="200" placeholder="Contoh: guru sekolah dasar di Kupang.">
+    <input class="input other" id="audience-other" type="text" maxlength="200" placeholder="Tulis kelompok audiens, misalnya: guru sekolah dasar di Kupang">
     <div class="err" id="audience-err"></div>
 
     <p class="q"><span class="num">4</span>Apa yang kamu harapkan setelah mereka menerima pesan ini?</p>
-    <p class="q-hint">Pilih hasil yang paling penting. Tambahkan detail jika ada tujuan lain.</p>
     <div class="chips" data-group="harapan" role="group" aria-label="Harapan">
-      <button class="chip" type="button" aria-pressed="true">Mendukung kebijakan</button>
-      <button class="chip" type="button" aria-pressed="false">Mendorong pejabat bertindak</button>
-      <button class="chip" type="button" aria-pressed="false">Ikut dalam aksi atau kegiatan</button>
-      <button class="chip" type="button" aria-pressed="false">Menandatangani petisi</button>
-      <button class="chip" type="button" aria-pressed="false">Menyebarkan informasi</button>
-      <button class="chip" type="button" aria-pressed="false">Mengubah kebiasaan</button>
-      <button class="chip" type="button" aria-pressed="false">Berdialog dengan komunitas</button>
-      <button class="chip" type="button" aria-pressed="false">Menggalang dukungan</button>
-      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+      <button class="chip" type="button" aria-pressed="true"><span class="choice-icon"><i class="ui-icon" data-lucide="scale"></i></span>Mendukung kebijakan</button>
+      <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="footprints"></i></span>Ikut bergerak</button>
+      <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="share-2"></i></span>Ikut menyebarkan</button>
+      <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="refresh-cw"></i></span>Mengubah kebiasaan</button>
     </div>
-    <input class="input option-input" id="harapan-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis hasil yang kamu harapkan.">
 
     <p class="q"><span class="num">5</span>Di mana pesan ini akan disampaikan?</p>
-    <p class="q-hint">Pilih kanal utama. Kamu bisa menambahkan kanal atau format lain.</p>
     <div class="chips" data-group="lewat" role="group" aria-label="Disampaikan lewat">
-      <button class="chip" type="button" aria-pressed="true" data-tab="wa">WhatsApp</button>
-      <button class="chip" type="button" aria-pressed="false" data-tab="ig">Instagram</button>
-      <button class="chip" type="button" aria-pressed="false" data-tab="talk">Bicara langsung</button>
-      <button class="chip" type="button" aria-pressed="false">Facebook</button>
-      <button class="chip" type="button" aria-pressed="false">TikTok</button>
-      <button class="chip" type="button" aria-pressed="false">Email atau newsletter</button>
-      <button class="chip" type="button" aria-pressed="false">Media massa</button>
-      <button class="chip" type="button" aria-pressed="false">Pertemuan komunitas</button>
-      <button class="chip" type="button" aria-pressed="false">Poster atau materi cetak</button>
-      <button class="chip" type="button" aria-pressed="false">Lainnya</button>
+      <button class="chip" type="button" aria-pressed="true" data-tab="wa"><span class="choice-icon"><i class="ui-icon" data-lucide="message-circle"></i></span>WhatsApp</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="ig"><span class="choice-icon"><i class="ui-icon" data-lucide="instagram"></i></span>Instagram</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="talk"><span class="choice-icon"><i class="ui-icon" data-lucide="mic"></i></span>Bicara langsung</button>
     </div>
-    <input class="input option-input" id="lewat-other" type="text" maxlength="180" placeholder="Jika memilih Lainnya, tulis kanal atau format yang kamu gunakan.">
 
     <div class="note">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
@@ -469,19 +438,15 @@ textarea.input.tall{min-height:150px}
   };
 
   var PROFILES=[
-    {name:"Pemuka agama dan komunitasnya",care:"Amanah, masa depan keluarga, dan tanggung jawab bersama",trust:"Pemuka agama yang mereka kenal dan teladan di lingkungan sendiri",away:"Bahasa teknis atau pesan yang terasa menyudutkan"},
-    {name:"Pejabat daerah dan anggota DPRD",care:"Dampak kebijakan bagi warga, ekonomi daerah, dan hasil kerja yang terlihat",trust:"Data lokal yang kuat, masukan konstituen, dan pandangan tokoh daerah",away:"Serangan personal atau tuntutan tanpa usulan yang bisa dijalankan"},
-    {name:"Ibu dan pengelola rumah tangga",care:"Kesehatan keluarga, biaya hidup, dan kebutuhan sehari-hari",trust:"Tenaga kesehatan, keluarga, dan komunitas sekitar",away:"Angka yang sulit dipahami atau isu yang terasa jauh dari rumah"},
-    {name:"Anak muda perkotaan",care:"Kesempatan kerja, masa depan, ruang berekspresi, dan keadilan",trust:"Teman sebaya, komunitas, serta kreator yang mereka ikuti",away:"Nada menggurui, jargon, dan ajakan yang terasa dibuat-buat"},
-    {name:"Pelaku usaha lokal",care:"Biaya operasional, kepastian aturan, dan peluang untuk berkembang",trust:"Asosiasi usaha, rekan bisnis, dan contoh nyata dari pelaku usaha lain",away:"Pesan yang mengabaikan dampak ekonomi atau terkesan anti-usaha"},
-    {name:"Petani dan nelayan",care:"Penghasilan, hasil panen atau tangkapan, perubahan cuaca, dan keberlanjutan usaha",trust:"Penyuluh, kelompok tani atau nelayan, dan tokoh desa",away:"Istilah rumit dan janji yang tidak menjawab kebutuhan mereka"},
-    {name:"Pekerja dan serikat pekerja",care:"Kepastian kerja, upah, keselamatan, dan perlindungan hak",trust:"Rekan kerja, serikat pekerja, dan pendamping ketenagakerjaan",away:"Pesan yang mengabaikan dampak kebijakan terhadap penghidupan"},
-    {name:"Guru, dosen, dan tenaga pendidikan",care:"Kualitas pendidikan, kesejahteraan, dan masa depan peserta didik",trust:"Rekan pendidik, organisasi profesi, dan komunitas sekolah",away:"Klaim tanpa bukti atau kebijakan yang tidak memahami kondisi lapangan"},
-    {name:"Tenaga kesehatan",care:"Keselamatan pasien, kualitas layanan, dan kondisi fasilitas kesehatan",trust:"Organisasi profesi, tenaga ahli, dan pengalaman layanan setempat",away:"Informasi kesehatan yang tidak akurat atau menimbulkan kepanikan"},
-    {name:"Warga di sekitar wilayah terdampak",care:"Kesehatan, lingkungan, akses layanan, dan ruang untuk menyampaikan aspirasi",trust:"Tokoh lokal, kelompok warga, dan pengalaman langsung masyarakat",away:"Janji dari pihak luar yang tidak memahami situasi setempat"},
-    {name:"Jurnalis dan media",care:"Fakta yang terverifikasi, kepentingan publik, dan narasumber yang kredibel",trust:"Dokumen, data terbuka, pakar, dan sumber primer",away:"Informasi yang tidak jelas sumbernya atau klaim berlebihan"},
-    {name:"Organisasi masyarakat sipil",care:"Dampak sosial, keadilan, partisipasi, dan perubahan sistemik",trust:"Bukti lapangan, jaringan organisasi, dan komunitas terdampak",away:"Ajakan yang tidak jelas tujuan atau pembagian perannya"}
+    {icon:"church",name:"Pemuka agama dan komunitasnya",care:"Amanah, masa depan keluarga, dan tanggung jawab bersama",trust:"Pemuka agama yang mereka kenal dan teladan di lingkungan sendiri",away:"Bahasa teknis atau pesan yang terasa menyudutkan"},
+    {icon:"landmark",name:"Pejabat daerah dan anggota DPRD",care:"Dampak kebijakan bagi warga, ekonomi daerah, dan hasil kerja yang terlihat",trust:"Data lokal yang kuat, masukan konstituen, dan pandangan tokoh daerah",away:"Serangan personal atau tuntutan tanpa usulan yang bisa dijalankan"},
+    {icon:"house",name:"Ibu dan pengelola rumah tangga",care:"Kesehatan keluarga, biaya hidup, dan kebutuhan sehari-hari",trust:"Tenaga kesehatan, keluarga, dan komunitas sekitar",away:"Angka yang sulit dipahami atau isu yang terasa jauh dari rumah"},
+    {icon:"users",name:"Anak muda perkotaan",care:"Kesempatan kerja, masa depan, ruang berekspresi, dan keadilan",trust:"Teman sebaya, komunitas, serta kreator yang mereka ikuti",away:"Nada menggurui, jargon, dan ajakan yang terasa dibuat-buat"},
+    {icon:"store",name:"Pelaku usaha lokal",care:"Biaya operasional, kepastian aturan, dan peluang untuk berkembang",trust:"Asosiasi usaha, rekan bisnis, dan contoh nyata dari pelaku usaha lain",away:"Pesan yang mengabaikan dampak ekonomi atau terkesan anti-usaha"},
+    {icon:"sprout",name:"Petani dan nelayan",care:"Penghasilan, hasil panen atau tangkapan, perubahan cuaca, dan keberlanjutan usaha",trust:"Penyuluh, kelompok tani atau nelayan, dan tokoh desa",away:"Istilah rumit dan janji yang tidak menjawab kebutuhan mereka"}
   ];
+
+  var FRAME_ICONS=["house","wind","hard-hat"];
 
   var FRAMES=[
     {nilai:"Amanah merawat bumi",judul:"Apa yang kita jaga hari ini, akan dirasakan anak cucu nanti",
@@ -517,10 +482,11 @@ textarea.input.tall{min-height:150px}
      hindari:"Menggambarkan pekerja sebagai penghambat perubahan atau menjanjikan pekerjaan pengganti tanpa rencana yang konkret."}
   ];
   var SWAPS=[["Dekarbonisasi","Mengurangi penggunaan energi dari bahan bakar fosil"],["Emisi","Gas pencemar yang dilepaskan ke udara"],["Transisi energi","Peralihan menuju sumber energi yang lebih bersih"],["Krisis iklim","Perubahan iklim dan dampaknya"],["NZE 2060","Target mencapai emisi nol bersih pada 2060"]];
-  var TABS=[["card","Ringkas"],["wa","WhatsApp"],["ig","Instagram"],["talk","Bahan bicara"]];
+  var TABS=[["card","clipboard-list","Ringkas"],["wa","message-circle","WhatsApp"],["ig","instagram","Instagram"],["talk","mic","Bahan bicara"]];
   var COPY_LABEL={card:"Salin ringkasan",wa:"Salin untuk WA",ig:"Salin untuk IG",talk:"Salin bahan bicara"};
 
-  function go(id){current=id;SCREENS.forEach(function(s){$(s).classList.toggle("hidden",s!==id);});window.scrollTo(0,0);}
+  function refreshIcons(){if(window.lucide)window.lucide.createIcons({attrs:{"class":"ui-icon"}});}
+  function go(id){current=id;SCREENS.forEach(function(s){$(s).classList.toggle("hidden",s!==id);});refreshIcons();window.scrollTo(0,0);}
   function setErr(input,id,t){$(id).textContent=t;if(input)$(input).classList.toggle("bad",!!t);}
   function toast(t){$("toast-text").textContent=t;$("toast").classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(function(){$("toast").classList.remove("show");},1800);}
   function copy(text,msg){
@@ -528,7 +494,6 @@ textarea.input.tall{min-height:150px}
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast(msg);},fb);}else{fb();}
   }
   function picked(group){return document.querySelector('[data-group="'+group+'"] [aria-pressed="true"]');}
-  function fieldValue(group,otherId){var choice=picked(group);var extra=$(otherId).value.trim();var label=choice?choice.textContent.trim():"";return extra?(label&&label!=="Lainnya"?label+". "+extra:extra):(label||"Belum ditentukan");}
   function talkText(f){return "• Gagasan utama: "+f.v+"\n• Konteks: "+f.p+"\n• Arah perubahan: "+f.s+"\n• Ajakan bertindak: "+f.a;}
   function textFor(f,tab){
     if(tab==="wa")return f.wa; if(tab==="ig")return f.ig; if(tab==="talk")return talkText(f);
@@ -560,25 +525,18 @@ textarea.input.tall{min-height:150px}
     box.querySelector(".c").textContent=p.care;box.querySelector(".t").textContent=p.trust;box.querySelector(".a").textContent=p.away;
   }
   PROFILES.forEach(function(p,i){
-    var b=document.createElement("button");b.type="button";b.className="profile";b.innerHTML="<b></b>";b.querySelector("b").textContent=p.name;
+    var b=document.createElement("button");b.type="button";b.className="profile";b.innerHTML='<span class="profile-icon" aria-hidden="true"><i class="ui-icon" data-lucide="'+p.icon+'"></i></span><b></b>';b.querySelector("b").textContent=p.name;
     b.setAttribute("aria-pressed",i===selected?"true":"false");
     b.onclick=function(){
       selected=(selected===i)?-1:i;
       document.querySelectorAll(".profile").forEach(function(x,j){x.setAttribute("aria-pressed",j===selected?"true":"false");});
-      if(selected>=0){$("audience-other").value="";$("audience-custom").setAttribute("aria-pressed","false");}
+      if(selected>=0)$("audience-other").value="";
       renderInsight();setErr("audience-other","audience-err","");
     };
-    $("profiles").appendChild(b);
+    $("profiles").appendChild(b);if(window.lucide)window.lucide.createIcons({attrs:{"class":"ui-icon"}});
   });
-  $("audience-custom").onclick=function(){
-    selected=-1;
-    document.querySelectorAll("#profiles .profile").forEach(function(x){x.setAttribute("aria-pressed","false");});
-    this.setAttribute("aria-pressed","true");
-    renderInsight();
-    $("audience-other").focus();
-  };
   $("audience-other").oninput=function(){
-    if(this.value.trim()){selected=-1;document.querySelectorAll("#profiles .profile").forEach(function(x){x.setAttribute("aria-pressed","false");});$("audience-custom").setAttribute("aria-pressed","true");renderInsight();}
+    if(this.value.trim()){selected=-1;document.querySelectorAll(".profile").forEach(function(x){x.setAttribute("aria-pressed","false");});renderInsight();}
     setErr("audience-other","audience-err","");
   };
   function audience(){var o=$("audience-other").value.trim();return o||(selected>=0?PROFILES[selected].name:"");}
@@ -587,9 +545,9 @@ textarea.input.tall{min-height:150px}
     var box=$("cards");box.innerHTML="";
     FRAMES.forEach(function(f,i){
       var el=document.createElement("article");el.className="card"+(i===0?" top":"");
-      var tabs=TABS.map(function(t){return '<button class="tab" role="tab" type="button" data-tab="'+t[0]+'">'+t[1]+'</button>';}).join("");
+      var tabs=TABS.map(function(t){return '<button class="tab" role="tab" type="button" data-tab="'+t[0]+'"><i class="ui-icon" data-lucide="'+t[1]+'"></i>'+t[2]+'</button>';}).join("");
       el.innerHTML=(i===0?'<span class="badge">'+I.star+'Pendekatan utama</span><p class="badge-why"></p>':'')+
-        '<span class="tag tone-'+(i+1)+'"></span><h2></h2>'+
+        '<div class="card-heading"><span class="theme-icon" aria-hidden="true"><i class="ui-icon" data-lucide="'+FRAME_ICONS[i]+'"></i></span><h2></h2></div><span class="tag tone-'+(i+1)+'"></span>'+
         '<div class="tabs" role="tablist" aria-label="Pilih versi">'+tabs+'</div>'+
         '<ol class="flow"><li><i>1</i><div><b>Gagasan utama</b><span class="fv"></span></div></li><li><i>2</i><div><b>Konteks</b><span class="fp"></span></div></li><li><i>3</i><div><b>Arah perubahan</b><span class="fs"></span></div></li><li><i>4</i><div><b>Ajakan bertindak</b><span class="fa"></span></div></li></ol>'+
         '<div class="out"></div>'+
@@ -610,7 +568,7 @@ textarea.input.tall{min-height:150px}
       }
       el.querySelectorAll(".tab").forEach(function(t){t.onclick=function(){show(t.getAttribute("data-tab"));};});
       el.querySelector(".copy").onclick=function(){copy(textFor(f,current),"Teks berhasil disalin");};
-      show(activeTab);box.appendChild(el);
+      show(activeTab);box.appendChild(el);refreshIcons();
     });
   }
 
@@ -648,12 +606,11 @@ textarea.input.tall{min-height:150px}
   $("go-create").onclick=function(){updateCount();go("s-create");};
   function updateCount(){$("count").textContent=$("agenda").value.length;}
   $("agenda").oninput=function(){updateCount();setErr("agenda","agenda-err","");};
-  ["topik-other","fokus-other","harapan-other","lewat-other"].forEach(function(id){$(id).oninput=function(){};});
 
   $("run-create").onclick=function(){
     var ag=$("agenda").value.trim()||"Mendorong pemerintah daerah beralih ke listrik tenaga surya",au=audience()||PROFILES[0].name;
-    var lw=picked("lewat");activeTab=(lw&&lw.getAttribute("data-tab"))||"wa";
-    var rows=[["Topik",fieldValue("topik","topik-other")],["Fokus perubahan",fieldValue("fokus","fokus-other")],["Agenda",ag],["Audiens",au],["Harapan",fieldValue("harapan","harapan-other")],["Kanal",fieldValue("lewat","lewat-other")]];
+    var lw=picked("lewat");activeTab=lw.getAttribute("data-tab");
+    var rows=[["Topik",picked("topik").textContent],["Agenda",ag],["Audiens",au],["Harapan",picked("harapan").textContent],["Lewat",lw.textContent]];
     var ctx=$("context");ctx.innerHTML="";
     rows.forEach(function(r){var b=document.createElement("b");b.textContent=r[0];var s=document.createElement("span");s.textContent=r[1];ctx.appendChild(b);ctx.appendChild(s);});
     runLoading("Merancang pendekatan kampanye",["Memahami isu dan tujuan kampanyemu","Menentukan sudut pandang yang relevan bagi audiens","Menyiapkan versi pesan untuk "+lw.textContent],function(){renderCards();renderSwaps("swaps-create");go("s-results");});
@@ -664,7 +621,7 @@ textarea.input.tall{min-height:150px}
   // Warn before leaving while results are on screen (where the browser allows it)
   window.addEventListener("beforeunload",function(e){if(current==="s-results"){e.preventDefault();e.returnValue="";}});
 
-  renderInsight();updateCount();go("s-login");
+  renderInsight();updateCount();refreshIcons();go("s-login");
 })();
 </script>
 </body>
