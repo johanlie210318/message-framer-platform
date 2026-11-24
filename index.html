@@ -7,15 +7,16 @@
 <title>Message Framer Platform</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root{
-  --bg:#FFFFFF; --app:#F4F4F8; --ink:#14142B; --muted:#6B6B80; --line:#E6E6EE; --field:#F4F4F8;
-  --brand:#4A35E8; --brand-ink:#FFFFFF; --brand-soft:#EEEBFF; --brand-press:#3A27C9;
+  --bg:#FFFFFF; --app:#EEEAE1; --ink:#252B28; --muted:#74766F; --line:#E5E0D6; --field:#F5F0E6;
+  --brand:#315C4B; --brand-ink:#FFFFFF; --brand-soft:#DFE8DE; --brand-press:#254638;
   --ok:#14A35C; --ok-soft:#E3F7EC; --err:#D93838; --fix:#B54708; --fix-soft:#FFF1E5; --warn:#9A5B00; --warn-soft:#FFF4DE;
-  --font:"Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --t1-bg:#FFF1D6; --t1:#8A5A00; --t2-bg:#E3F4FF; --t2:#0B5C8C; --t3-bg:#E6F7EE; --t3:#146B3F; --insight-dt:#4B4580; --insight-sm:#6E6896;
+  --font:"Source Sans 3", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display:"Newsreader", Georgia, serif;
+  --t1-bg:#F5E8D7; --t1:#80552D; --t2-bg:#E4ECEB; --t2:#285B60; --t3-bg:#E3ECE3; --t3:#315C4B; --insight-dt:#315C4B; --insight-sm:#74766F;
   color-scheme:light; box-sizing:border-box;
   padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -37,7 +38,7 @@ button{font:inherit}
 .text-btn{border:none;background:none;color:var(--brand);font-weight:700;font-size:14px;padding:8px 10px;cursor:pointer}
 
 .logo{display:flex;align-items:center;gap:10px;padding:28px 0 40px}
-.logo-mark{width:40px;height:40px;border-radius:13px;background:var(--brand);display:grid;place-items:center;color:#fff;box-shadow:0 5px 14px rgba(74,53,232,.20)}
+.logo-mark{width:40px;height:40px;border-radius:13px;background:var(--brand);display:grid;place-items:center;color:#fff;box-shadow:0 5px 14px rgba(49,92,75,.18)}
 .logo-mark i{width:22px;height:22px;stroke-width:2.2}
 .ui-icon{width:18px;height:18px;stroke-width:2;flex:none}
 .mode-icon .ui-icon{width:23px;height:23px;stroke-width:2}
@@ -57,8 +58,9 @@ button{font:inherit}
 .logo-text{font-weight:800;font-size:17px;letter-spacing:-0.02em}
 .logo-text small{display:block;font-weight:500;font-size:12px;color:var(--muted);letter-spacing:0}
 
-h1{font-size:26px;line-height:1.2;font-weight:800;letter-spacing:-0.03em;margin:4px 0 8px}
-h3{font-size:16px;font-weight:800;letter-spacing:-0.01em;margin:0 0 10px}
+h1{font-family:var(--font-display);font-size:30px;line-height:1.2;font-weight:800;letter-spacing:-0.03em;margin:4px 0 8px}
+h2{font-family:var(--font-display)}
+h3{font-family:var(--font-display);font-size:19px;font-weight:800;letter-spacing:-0.01em;margin:0 0 10px}
 .sub{color:var(--muted);margin:0 0 24px;font-size:15px}
 .q{font-weight:800;font-size:16px;letter-spacing:-0.01em;margin:28px 0 4px}
 .q-hint{color:var(--muted);font-size:13px;margin:0 0 12px}
@@ -120,7 +122,7 @@ textarea.input.tall{min-height:150px}
 .mode:active{border-color:var(--brand)}
 .mode-icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none}
 .mode-icon.a{background:var(--brand-soft);color:var(--brand)}
-.mode-icon.b{background:#E6F7EE;color:#146B3F}
+.mode-icon.b{background:var(--ok-soft);color:var(--ok)}
 .mode b{display:block;font-size:17px;font-weight:800;letter-spacing:-0.01em;margin-bottom:4px}
 .mode span{display:block;font-size:14px;color:var(--muted)}
 .mode .arrow{margin-left:auto;align-self:center;color:var(--muted);flex:none}
@@ -149,7 +151,7 @@ textarea.input.tall{min-height:150px}
 .badge-why{font-size:13px;color:var(--brand);margin:-4px 0 12px}
 .tag{display:inline-block;font-size:12px;font-weight:700;padding:5px 10px;border-radius:8px;margin-bottom:10px}
 .tone-1{background:var(--t1-bg);color:var(--t1)}.tone-2{background:var(--t2-bg);color:var(--t2)}.tone-3{background:var(--t3-bg);color:var(--t3)}
-.card h2{font-size:18px;line-height:1.3;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px}
+.card h2{font-family:var(--font-display);font-size:22px;line-height:1.3;font-weight:800;letter-spacing:-0.02em;margin:0 0 12px}
 .tabs{display:flex;gap:4px;background:var(--field);border-radius:12px;padding:4px;margin:0 0 14px;overflow-x:auto}
 .tab{flex:1;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:700;padding:8px 6px;border-radius:9px;cursor:pointer;white-space:nowrap}
 .tab[aria-selected="true"]{background:var(--bg);color:var(--ink);box-shadow:0 1px 2px rgba(20,20,43,.08)}
@@ -199,7 +201,7 @@ textarea.input.tall{min-height:150px}
 .compare .before{background:var(--field);border-radius:14px;padding:14px;font-size:14px;color:var(--muted)}
 .compare .after{background:var(--ok-soft);border-radius:14px;padding:14px;font-size:14px}
 .compare b{display:block;font-size:12px;font-weight:700;margin-bottom:4px}
-.compare .before b{color:var(--muted)}.compare .after b{color:#146B3F}
+.compare .before b{color:var(--muted)}.compare .after b{color:var(--ok)}
 
 .toast{position:fixed;left:50%;bottom:calc(100px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font-size:14px;font-weight:600;padding:10px 16px;border-radius:12px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90%;text-align:center}
 .toast.show{opacity:1}
@@ -241,8 +243,8 @@ textarea.input.tall{min-height:150px}
       <div class="logo-mark" aria-hidden="true"><i data-lucide="messages-square"></i></div>
       <div class="logo-text">Message Framer Platform<small>by C4C</small></div>
     </div>
-    <h1>Buat pesan yang didengar. Gerakan yang makin kuat.</h1>
-    <p class="sub">Temukan cara bicara yang paling dekat dengan audiens—agar isu penting tidak berhenti jadi sekadar wacana.</p>
+    <h1>Buat pesan yang dekat dengan orang-orang yang ingin kamu ajak.</h1>
+    <p class="sub">Sampaikan isu penting dengan bahasa yang dekat dengan kehidupan orang-orang yang ingin kamu ajak.</p>
     <label class="label" for="email">Email organisasi</label>
     <input class="input" id="email" type="email" inputmode="email" autocomplete="email" spellcheck="false" value="anggota@demo.or.id">
     <div class="err" id="email-err"></div>
@@ -266,7 +268,7 @@ textarea.input.tall{min-height:150px}
       <div class="notif-body"><small>Gmail · baru saja</small><b>Kode verifikasi: 482913</b><small>Pembingkai Pesan · berlaku 10 menit</small></div>
     </button>
     <p class="notif-hint">Untuk demo, ketuk notifikasi di atas agar kode terisi otomatis.</p>
-    <label class="label" for="otp">Kode masuk</label>
+    <label class="label" for="otp">Kode verifikasi</label>
     <input class="input otp" id="otp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">
     <div class="err" id="otp-err"></div>
     <div class="resend"><span>Belum menerima email? Periksa folder spam atau promosi.</span><button class="text-btn" id="resend" type="button" disabled>Kirim ulang (60)</button></div>
@@ -276,10 +278,10 @@ textarea.input.tall{min-height:150px}
   <!-- Consent (first sign-in only) -->
   <section id="s-consent" class="screen hidden">
     <div class="bar"><span class="bar-title"></span></div>
-    <h1>Kenali cara kerja dan privasi datamu</h1>
-    <p class="sub">Sebelum menggunakan platform, luangkan waktu sebentar untuk memahami bagaimana informasi yang kamu masukkan diperlakukan.</p>
+    <h1>Sebelum mulai, baca dulu soal data dan privasi</h1>
+    <p class="sub">Sebelum mulai, ada beberapa hal yang perlu kamu tahu tentang informasi yang kamu masukkan dan cara kami menggunakannya.</p>
     <ul class="consent">
-      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><div><b>Isi pesanmu tidak disimpan</b><span>Informasi agenda, audiens, dan hasil penyusunan pesan akan terhapus saat halaman ditutup.</span></div></li>
+      <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></i><div><b>Isi pesanmu tidak disimpan</b><span>Informasi kampanye, orang yang ingin kamu jangkau, dan pesan yang dibuat akan terhapus saat halaman ditutup.</span></div></li>
       <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></i><div><b>Data yang kami simpan</b><span>Kami hanya menyimpan alamat email untuk verifikasi anggota dan jumlah penggunaan harian untuk menerapkan batas 10 kali.</span></div></li>
       <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg></i><div><b>Bagaimana pesanmu diproses</b><span>Platform menggunakan Claude dari Anthropic untuk membantu menyusun ide pesan. Menurut kebijakan Anthropic yang berlaku untuk layanan ini, data dihapus paling lama dalam 30 hari dan tidak digunakan untuk melatih model AI.</span></div></li>
       <li><i><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z"/></svg></i><div><b>Hindari memasukkan informasi pribadi</b><span>Jangan masukkan nama lengkap, nomor telepon, alamat, atau informasi lain yang dapat mengidentifikasi seseorang.</span></div></li>
@@ -291,18 +293,18 @@ textarea.input.tall{min-height:150px}
   <!-- Home -->
   <section id="s-home" class="screen hidden">
     <div class="bar"><span class="bar-title muted-title" id="who"></span><button class="text-btn" data-go="s-login">Keluar</button></div>
-    <h1>Apa yang ingin kamu suarakan hari ini?</h1>
-    <p class="sub">Gagasan utama isu yang kamu perjuangkan dan siapa yang ingin kamu jangkau. Kita susun pesannya dari sana.</p>
+    <h1>Apa yang ingin kamu perjuangkan hari ini?</h1>
+    <p class="sub">Ceritakan isu yang ingin kamu angkat dan siapa yang ingin kamu ajak terlibat.</p>
     <div class="modes">
       <button class="mode" id="go-create">
         <div class="mode-icon a" aria-hidden="true"><i class="ui-icon" data-lucide="message-square-text"></i></div>
-        <div><b>Rancang pesan kampanye</b><span>Dapatkan beberapa pendekatan pesan yang bisa kamu kembangkan untuk kanal komunikasi yang berbeda.</span></div>
+        <div><b>Buat pesan kampanye</b><span>Temukan beberapa cara menyampaikan pesan yang bisa kamu sesuaikan untuk tiap kanal komunikasi.</span></div>
         <svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>
       </button>
     </div>
     <div class="tip">
       <b>Catatan untuk kampanyemu</b>
-      <p>Pesan yang kuat tidak selalu dimulai dari besarnya masalah. Mulailah dari hal yang dekat dengan kehidupan audiens—sesuatu yang mereka rasakan, pikirkan, atau ingin lindungi.</p>
+      <p>Pesan yang kuat bisa dimulai dari hal sederhana yang dekat dengan kehidupan orang lain, seperti masalah yang mereka hadapi atau sesuatu yang ingin mereka jaga.</p>
     </div>
     <p class="hint-quota" style="margin-top:20px">Sisa kesempatan hari ini: <b id="quota">10</b></p>
   </section>
@@ -311,43 +313,52 @@ textarea.input.tall{min-height:150px}
   <section id="s-create" class="screen hidden">
     <div class="bar">
       <button class="icon-btn" data-go="s-home" aria-label="Kembali"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <span class="bar-title">Rancang pesan kampanye</span>
+      <span class="bar-title">Buat pesan kampanye</span>
     </div>
-    <h1>Mari mulai dari inti kampanyemu</h1>
-    <p class="sub">Jawab lima hal berikut. Tidak perlu merangkai kalimat sempurna—cukup ceritakan konteksnya.</p>
+    <h1>Ceritakan kampanyemu</h1>
+    <p class="sub">Jawab lima pertanyaan ini. Tidak perlu memikirkan susunan kata. Ceritakan saja situasinya.</p>
 
-    <p class="q"><span class="num">1</span>Isu apa yang sedang kamu angkat?</p>
+    <p class="q"><span class="num">1</span>Isu apa yang ingin kamu bicarakan?</p>
     <div class="chips" data-group="topik" role="group" aria-label="Topik">
       <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="cloud-sun"></i></span>Iklim</button>
       <button class="chip" type="button" aria-pressed="true"><span class="choice-icon"><i class="ui-icon" data-lucide="zap"></i></span>Energi</button>
       <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="landmark"></i></span>Demokrasi</button>
+      <button class="chip" type="button" aria-pressed="false" data-other="topik">Lainnya</button>
     </div>
+    <input class="input other hidden" id="topik-other" type="text" maxlength="120" placeholder="Tulis isu yang ingin kamu bicarakan">
+    <div class="err" id="topik-err"></div>
 
-    <p class="q"><span class="num">2</span>Apa perubahan yang ingin kamu dorong?</p>
-    <p class="q-hint">Ceritakan tujuan kampanyemu secara langsung. Apa yang perlu berubah, dan siapa yang punya peran?</p>
+    <p class="q"><span class="num">2</span>Perubahan apa yang ingin kamu lihat?</p>
+    <p class="q-hint">Ceritakan apa yang ingin kamu ubah. Menurutmu, siapa yang bisa ikut mewujudkannya?</p>
     <textarea class="input" id="agenda" maxlength="600">Mendorong pemerintah daerah menutup PLTU batu bara lebih cepat dan beralih ke listrik tenaga surya</textarea>
     <p class="counter"><span id="count">0</span>/600</p>
     <div class="err" id="agenda-err"></div>
 
     <p class="q"><span class="num">3</span>Siapa yang ingin kamu jangkau?</p>
-    <p class="q-hint">Pilih kelompok yang paling sesuai atau masukkan audiensmu sendiri.</p>
+    <p class="q-hint">Pilih kelompok yang ingin kamu ajak bicara. Kamu juga bisa menuliskannya sendiri.</p>
     <div class="profiles" id="profiles" role="group" aria-label="Audiens"></div>
     <div class="insight" id="insight" aria-live="polite"></div>
-    <input class="input other" id="audience-other" type="text" maxlength="200" placeholder="Tulis kelompok audiens, misalnya: guru sekolah dasar di Kupang">
+    <input class="input other" id="audience-other" type="text" maxlength="200" placeholder="Tulis kelompok orang yang ingin kamu jangkau, misalnya: guru sekolah dasar di Kupang">
     <div class="err" id="audience-err"></div>
 
-    <p class="q"><span class="num">4</span>Apa yang kamu harapkan setelah mereka menerima pesan ini?</p>
+    <p class="q"><span class="num">4</span>Setelah mendengar pesan ini, kamu berharap mereka akan melakukan apa?</p>
     <div class="chips" data-group="harapan" role="group" aria-label="Harapan">
       <button class="chip" type="button" aria-pressed="true"><span class="choice-icon"><i class="ui-icon" data-lucide="scale"></i></span>Mendukung kebijakan</button>
       <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="footprints"></i></span>Ikut bergerak</button>
       <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="share-2"></i></span>Ikut menyebarkan</button>
       <button class="chip" type="button" aria-pressed="false"><span class="choice-icon"><i class="ui-icon" data-lucide="refresh-cw"></i></span>Mengubah kebiasaan</button>
+      <button class="chip" type="button" aria-pressed="false" data-other="harapan">Lainnya</button>
     </div>
+    <input class="input other hidden" id="harapan-other" type="text" maxlength="160" placeholder="Tulis tindakan yang kamu harapkan">
+    <div class="err" id="harapan-err"></div>
 
-    <p class="q"><span class="num">5</span>Di mana pesan ini akan disampaikan?</p>
+    <p class="q"><span class="num">5</span>Lewat mana pesan ini akan disampaikan?</p>
     <div class="chips" data-group="lewat" role="group" aria-label="Disampaikan lewat">
       <button class="chip" type="button" aria-pressed="true" data-tab="wa"><span class="choice-icon"><i class="ui-icon" data-lucide="message-circle"></i></span>WhatsApp</button>
-      <button class="chip" type="button" aria-pressed="false" data-tab="ig"><span class="choice-icon"><i class="ui-icon" data-lucide="instagram"></i></span>Instagram</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="ig"><span class="choice-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>Instagram</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="tt"><span class="choice-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 7.2a5.8 5.8 0 0 1-4.1-4.7V2h-3.7v13.5a2.7 2.7 0 1 1-2.7-2.7c.4 0 .8.1 1.1.2V9.2a6.4 6.4 0 1 0 5.3 6.3V9.1a9.4 9.4 0 0 0 4.1 1V7.2z"/></svg></span>TikTok</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="threads"><span class="choice-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.7 8.1c-.8-3.1-3-4.8-6.5-4.8-4.4 0-7.1 3.2-7.1 8.6 0 5.5 2.7 8.7 7.2 8.7 3.8 0 6.2-2 6.2-5.2 0-2.8-1.8-4.5-4.8-4.5-2.1 0-3.5 1-3.5 2.7 0 1.4 1.1 2.3 2.7 2.3 1.8 0 3.2-1.1 3.8-3.1"/><path d="M10.2 7.9c1.1-.8 2.8-.8 4.1-.2 1.2.6 2 1.8 2.3 3.5"/></svg></span>Threads</button>
+      <button class="chip" type="button" aria-pressed="false" data-tab="x"><span class="choice-icon"><svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.8L18.9 2zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20z"/></svg></span>X</button>
       <button class="chip" type="button" aria-pressed="false" data-tab="talk"><span class="choice-icon"><i class="ui-icon" data-lucide="mic"></i></span>Bicara langsung</button>
     </div>
 
@@ -355,14 +366,14 @@ textarea.input.tall{min-height:150px}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
       <span>Informasi yang kamu masukkan tidak disimpan. Untuk menjaga privasi, hindari mencantumkan data pribadi.</span>
     </div>
-    <div class="cta"><div class="cta-in"><button class="btn" id="run-create">Susun pendekatan pesan</button></div></div>
+    <div class="cta"><div class="cta-in"><button class="btn" id="run-create">Buat pilihan pesan</button></div></div>
   </section>
 
   <!-- Loading -->
   <section id="s-loading" class="screen hidden">
     <div class="bar"><span class="bar-title"></span></div>
-    <h1 id="load-title">Merancang pendekatan kampanye</h1>
-    <p class="sub">Kami sedang mencari sudut pandang yang paling relevan untuk audiensmu.</p>
+    <h1 id="load-title">Menyiapkan pesan kampanye</h1>
+    <p class="sub">Kami sedang menyiapkan beberapa pilihan pesan untuk orang yang ingin kamu jangkau.</p>
     <ul class="loading-steps">
       <li id="ls1"><i></i><span></span></li>
       <li id="ls2"><i></i><span></span></li>
@@ -375,13 +386,13 @@ textarea.input.tall{min-height:150px}
   <section id="s-results" class="screen hidden">
     <div class="bar">
       <button class="icon-btn" data-go="s-create" aria-label="Ubah jawaban"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <span class="bar-title">Arah pesan kampanyemu</span>
+      <span class="bar-title">Pilihan pesan untuk kampanyemu</span>
     </div>
-    <h1>Tiga pendekatan untuk satu tujuan</h1>
-    <p class="sub">Setiap pendekatan membawa sudut pandang yang berbeda. Pilih yang paling sesuai dengan tujuan dan karakter audiensmu, lalu sesuaikan dengan konteks kampanye.</p>
-    <div class="keep" role="note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17.5v.5"/></svg><span>Hasil hanya tersedia selama halaman ini terbuka. Salin naskah yang ingin kamu gunakan sebelum meninggalkan halaman.</span></div>
+    <h1>Satu tujuan, tiga pilihan pesan</h1>
+    <p class="sub">Ketiganya membawa pesan yang sama dengan cara yang berbeda. Pilih yang paling cocok untuk orang yang ingin kamu ajak, lalu sesuaikan dengan keadaan di tempatmu.</p>
+    <div class="keep" role="note"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17.5v.5"/></svg><span>Hasil ini tidak akan tersimpan setelah halaman ditutup. Salin dulu pesan yang ingin kamu pakai.</span></div>
     <div class="context" id="context"></div>
-    <p class="demo-flag">Contoh hasil untuk kebutuhan demo</p>
+    <p class="demo-flag">Contoh hasil</p>
     <div id="cards"></div>
     <div class="swaps" id="swaps-create"></div>
     <div class="cta"><div class="cta-in row">
@@ -394,8 +405,8 @@ textarea.input.tall{min-height:150px}
   <section id="s-limit" class="screen hidden">
     <div class="done-wrap">
       <div class="hero-icon" style="margin:0 auto 22px" aria-hidden="true"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
-      <h1>Kamu sudah menggunakan seluruh kesempatan hari ini</h1>
-      <p class="sub">Kesempatan menyusun pesan akan tersedia kembali mulai pukul 00.00 WIB. Jika perlu akses tambahan, silakan hubungi pengelola organisasimu.</p>
+      <h1>Batas penggunaan hari ini sudah tercapai</h1>
+      <p class="sub">Kamu bisa membuat pesan lagi mulai pukul 00.00 WIB. Kalau butuh akses tambahan, hubungi pengelola organisasimu.</p>
     </div>
     <div class="cta"><div class="cta-in">
       <button class="btn" data-go="s-home">Kembali ke beranda</button>
@@ -408,7 +419,7 @@ textarea.input.tall{min-height:150px}
     <div class="done-wrap">
       <div class="done-icon" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
       <h1>Sampai di sini dulu</h1>
-      <p class="sub">Sesi ini telah berakhir dan informasi yang kamu masukkan tidak disimpan. Semoga pesanmu membantu membawa perubahan yang kamu perjuangkan.</p>
+      <p class="sub">Sesi ini sudah berakhir dan informasi yang kamu masukkan tidak disimpan. Semoga pesan ini membantu kampanyemu menjangkau lebih banyak orang.</p>
     </div>
     <div class="cta"><div class="cta-in">
       <button class="btn" data-go="s-home">Kembali ke beranda</button>
@@ -450,12 +461,12 @@ textarea.input.tall{min-height:150px}
 
   var FRAMES=[
     {nilai:"Amanah merawat bumi",judul:"Apa yang kita jaga hari ini, akan dirasakan anak cucu nanti",
-     why_top:"Pendekatan ini menghubungkan isu energi dengan nilai tanggung jawab antargenerasi yang dekat dengan komunitas keagamaan.",
+     why_top:"Cara ini menghubungkan isu energi dengan tanggung jawab menjaga lingkungan untuk generasi berikutnya, nilai yang dekat dengan komunitas keagamaan.",
      v:"Menjaga alam bukan hanya soal hari ini. Ini tentang lingkungan yang akan kita tinggalkan untuk anak cucu.",
      p:"Di sekitar kita, aktivitas PLTU batu bara menjadi salah satu sumber polusi udara yang perlu mendapat perhatian.",
      s:"Peralihan ke energi surya dapat menjadi bagian dari solusi, dengan perencanaan yang matang dan sesuai kebutuhan daerah.",
      a:"Dorong pemerintah daerah membuka pembahasan yang serius tentang percepatan peralihan dari PLTU ke energi yang lebih bersih.",
-     wa:"Bapak dan Ibu yang kami hormati,\n\nKita tentu ingin anak cucu tumbuh di lingkungan yang sehat. Karena itu, menjaga alam tidak cukup hanya menjadi nasihat. Kita perlu mendukung langkah nyata bersama.\n\nSalah satu hal yang perlu kita bicarakan adalah sumber listrik yang kita gunakan. Ketergantungan pada batu bara membawa dampak polusi yang perlu ditangani, sementara energi surya bisa menjadi salah satu pilihan untuk masa depan.\n\nMari dorong pemerintah daerah membahas langkah peralihan menuju energi yang lebih bersih, dengan rencana yang jelas dan berpihak pada warga.",
+     wa:"Bapak dan Ibu,\n\nKita tentu ingin anak cucu tumbuh di lingkungan yang sehat. Karena itu, menjaga alam tidak cukup hanya menjadi nasihat. Kita perlu mendukung langkah nyata bersama.\n\nSalah satu hal yang perlu kita bicarakan adalah sumber listrik yang kita gunakan. Ketergantungan pada batu bara membawa dampak polusi yang perlu ditangani, sementara energi surya bisa menjadi salah satu pilihan untuk masa depan.\n\nMari dorong pemerintah daerah membahas langkah peralihan menuju energi yang lebih bersih, dengan rencana yang jelas dan berpihak pada warga.",
      ig:"Lingkungan yang sehat bukan hadiah untuk anak cucu. Itu tanggung jawab yang kita mulai hari ini.\n\nSudah waktunya kita membicarakan masa depan energi daerah: mengurangi ketergantungan pada batu bara dan membuka lebih banyak ruang bagi energi surya.\n\nJaga bumi, mulai dari keputusan yang kita dukung hari ini.\n\n#EnergiBersih #UntukAnakCucu",
      alasan:"Nilai menjaga titipan dan tanggung jawab antargenerasi memberi landasan yang kuat tanpa membuat pesan terasa seperti ceramah atau slogan politik.",
      penyampai:"Pemuka agama atau tokoh komunitas yang dipercaya warga",
@@ -467,7 +478,7 @@ textarea.input.tall{min-height:150px}
      a:"Ajak warga meminta pemerintah daerah menjelaskan rencana dan target peralihan menuju energi yang lebih bersih.",
      wa:"Bapak dan Ibu,\n\nUrusan udara bersih bukan isu yang jauh dari kehidupan kita. Ini berkaitan dengan lingkungan tempat anak-anak bermain, tempat kita bekerja, dan tempat keluarga beraktivitas setiap hari.\n\nKarena itu, pilihan sumber energi perlu ikut menjadi perhatian. Kita bisa mulai dengan mendorong penggunaan energi yang lebih bersih dan mengurangi ketergantungan pada batu bara.\n\nMari minta pemerintah daerah menyampaikan rencana yang jelas: apa langkahnya, kapan dimulai, dan bagaimana warga akan dilibatkan.",
      ig:"Udara bersih seharusnya jadi bagian dari keseharian, bukan sesuatu yang harus kita perjuangkan setelah masalah datang.\n\nPilihan energi ikut menentukan lingkungan tempat keluarga kita hidup. Saatnya mendorong langkah nyata menuju sumber listrik yang lebih bersih.\n\nMulai dari bertanya. Lanjutkan dengan ikut mengawal.\n\n#UdaraBersih #EnergiBersih",
-     alasan:"Pendekatan ini membawa isu energi ke pengalaman sehari-hari. Pesan tidak menakut-nakuti, tetapi mengajak audiens melihat alasan praktis untuk peduli.",
+     alasan:"Cara ini mengaitkan isu energi dengan kehidupan sehari-hari. Pesan ini mengajak orang melihat hubungan antara pilihan energi dan kehidupan sehari-hari, tanpa menakut-nakuti.",
      penyampai:"Tenaga kesehatan, kader lingkungan, atau tokoh warga yang memahami kondisi setempat",
      hindari:"Mengaitkan penyakit tertentu secara langsung dengan PLTU tanpa bukti dan data kesehatan yang dapat dipertanggungjawabkan."},
     {nilai:"Perubahan yang adil bagi semua",judul:"Energi boleh berubah. Penghidupan warga harus tetap terjaga.",
@@ -475,15 +486,15 @@ textarea.input.tall{min-height:150px}
      p:"Pekerja PLTU dan keluarga yang menggantungkan penghasilan pada industri ini punya alasan untuk khawatir ketika rencana penutupan dibicarakan.",
      s:"Peralihan yang adil perlu disertai dialog sejak awal, perlindungan bagi pekerja, dan akses ke pelatihan serta peluang kerja baru.",
      a:"Dorong pemerintah daerah melibatkan pekerja dan masyarakat dalam menyusun rencana peralihan yang melindungi penghidupan mereka.",
-     wa:"Bapak dan Ibu,\n\nKita bisa sepakat bahwa masa depan energi perlu lebih bersih. Tapi ada satu hal yang tidak boleh dilupakan: di balik PLTU, ada pekerja dan keluarga yang menggantungkan hidup pada pekerjaan mereka.\n\nKarena itu, perubahan tidak cukup hanya bicara soal kapan PLTU ditutup. Pemerintah juga perlu menyiapkan perlindungan bagi pekerja, pelatihan yang relevan, dan kesempatan kerja baru. Mereka yang terdampak harus dilibatkan sejak awal.\n\nMari dorong proses peralihan yang tidak meninggalkan siapa pun di belakang.",
+     wa:"Bapak dan Ibu,\n\nKita bisa sepakat bahwa masa depan energi perlu lebih bersih. Tapi ada satu hal yang tidak boleh dilupakan: di balik PLTU, ada pekerja dan keluarga yang menggantungkan hidup pada pekerjaan mereka.\n\nKarena itu, perubahan tidak cukup hanya bicara soal kapan PLTU ditutup. Pemerintah juga perlu menyiapkan perlindungan bagi pekerja, pelatihan sesuai kebutuhan, dan kesempatan kerja baru. Mereka yang terdampak harus dilibatkan sejak awal.\n\nMari dorong proses peralihan yang tidak meninggalkan siapa pun di belakang.",
      ig:"Masa depan energi yang lebih bersih harus berjalan beriringan dengan masa depan pekerjanya.\n\nDi balik setiap rencana perubahan, ada keluarga yang membutuhkan kepastian. Karena itu, pekerja harus didengar, dilibatkan, dan mendapat akses ke pelatihan serta peluang kerja baru.\n\nPerubahan yang baik adalah perubahan yang adil.\n\n#TransisiAdil #PekerjaJugaPenting",
-     alasan:"Pendekatan ini mengakui kekhawatiran pekerja, sehingga ajakan perubahan terasa lebih realistis dan tidak mengabaikan orang-orang yang terdampak langsung.",
+     alasan:"Cara ini mengakui kekhawatiran pekerja. Ajakan perubahan pun terasa lebih realistis dan tidak mengabaikan mereka yang terdampak langsung.",
      penyampai:"Perwakilan pekerja, tokoh masyarakat, dan pemangku kebijakan daerah",
      hindari:"Menggambarkan pekerja sebagai penghambat perubahan atau menjanjikan pekerjaan pengganti tanpa rencana yang konkret."}
   ];
   var SWAPS=[["Dekarbonisasi","Mengurangi penggunaan energi dari bahan bakar fosil"],["Emisi","Gas pencemar yang dilepaskan ke udara"],["Transisi energi","Peralihan menuju sumber energi yang lebih bersih"],["Krisis iklim","Perubahan iklim dan dampaknya"],["NZE 2060","Target mencapai emisi nol bersih pada 2060"]];
-  var TABS=[["card","clipboard-list","Ringkas"],["wa","message-circle","WhatsApp"],["ig","instagram","Instagram"],["talk","mic","Bahan bicara"]];
-  var COPY_LABEL={card:"Salin ringkasan",wa:"Salin untuk WA",ig:"Salin untuk IG",talk:"Salin bahan bicara"};
+  var TABS=[["card","clipboard-list","Ringkas"],["wa","message-circle","WhatsApp"],["ig","instagram-brand","Instagram"],["tt","tiktok-brand","TikTok"],["threads","threads-brand","Threads"],["x","x-brand","X"],["talk","mic","Bahan bicara"]];
+  var COPY_LABEL={card:"Salin ringkasan",wa:"Salin untuk WA",ig:"Salin untuk Instagram",tt:"Salin untuk TikTok",threads:"Salin untuk Threads",x:"Salin untuk X",talk:"Salin bahan bicara"};
 
   function refreshIcons(){if(window.lucide)window.lucide.createIcons({attrs:{"class":"ui-icon"}});}
   function go(id){current=id;SCREENS.forEach(function(s){$(s).classList.toggle("hidden",s!==id);});refreshIcons();window.scrollTo(0,0);}
@@ -494,14 +505,14 @@ textarea.input.tall{min-height:150px}
     if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){toast(msg);},fb);}else{fb();}
   }
   function picked(group){return document.querySelector('[data-group="'+group+'"] [aria-pressed="true"]');}
-  function talkText(f){return "• Gagasan utama: "+f.v+"\n• Konteks: "+f.p+"\n• Arah perubahan: "+f.s+"\n• Ajakan bertindak: "+f.a;}
+  function talkText(f){return "• Pesan utama: "+f.v+"\n• Konteks: "+f.p+"\n• Perubahan yang diharapkan: "+f.s+"\n• Ajakannya: "+f.a;}
   function textFor(f,tab){
-    if(tab==="wa")return f.wa; if(tab==="ig")return f.ig; if(tab==="talk")return talkText(f);
-    return f.judul+"\nGagasan utama: "+f.v+"\nKonteks: "+f.p+"\nArah perubahan: "+f.s+"\nAjakan bertindak: "+f.a;
+    if(tab==="wa")return f.wa; if(tab==="ig"||tab==="tt"||tab==="threads"||tab==="x")return f.ig; if(tab==="talk")return talkText(f);
+    return f.judul+"\nPesan utama: "+f.v+"\nKonteks: "+f.p+"\nPerubahan yang diharapkan: "+f.s+"\nAjakannya: "+f.a;
   }
   function renderSwaps(id){
     var box=$(id);
-    box.innerHTML='<h3>Pilih bahasa yang lebih membumi</h3><p>Gunakan istilah yang akrab bagi audiens, tanpa menghilangkan makna yang ingin disampaikan.</p>';
+    box.innerHTML='<h3>Pakai kata yang lebih sederhana</h3><p>Kalau ada istilah yang terasa rumit, ganti dengan kata yang biasa dipakai sehari-hari.</p>';
     SWAPS.forEach(function(s){
       var row=document.createElement("div");row.className="swap";
       row.innerHTML='<s></s>'+I.arrow+'<span></span>';
@@ -512,8 +523,19 @@ textarea.input.tall{min-height:150px}
 
   // chip groups: single choice
   document.querySelectorAll("[data-group]").forEach(function(g){
-    g.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){g.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed","false");});c.setAttribute("aria-pressed","true");};});
+    g.querySelectorAll(".chip").forEach(function(c){c.onclick=function(){
+      g.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed","false");});
+      c.setAttribute("aria-pressed","true");
+      var group=g.getAttribute("data-group");
+      if(group==="topik"||group==="harapan"){
+        var field=$(group+"-other"),err=group+"-err";
+        field.classList.toggle("hidden",c.getAttribute("data-other")!==group);
+        if(c.getAttribute("data-other")!==group){field.value="";setErr(group+"-other",err,"");}
+      }
+    };});
   });
+  $("topik-other").oninput=function(){setErr("topik-other","topik-err","");};
+  $("harapan-other").oninput=function(){setErr("harapan-other","harapan-err","");};
 
   // audience profiles + insight panel
   var selected=0;
@@ -521,7 +543,7 @@ textarea.input.tall{min-height:150px}
     var box=$("insight");
     if(selected<0){box.classList.add("hidden");return;}
     var p=PROFILES[selected];box.classList.remove("hidden");
-    box.innerHTML='<p class="insight-title">'+I.bulb+'<span>Hal yang perlu dipertimbangkan</span></p><dl><div><dt>Hal yang dekat dengan mereka</dt><dd class="c"></dd></div><div><dt>Sumber yang mereka percaya</dt><dd class="t"></dd></div><div><dt>Hal yang berisiko membuat mereka tidak tertarik</dt><dd class="a"></dd></div></dl><small>Ini gambaran umum. Kenali konteks lokal sebelum menggunakannya sebagai dasar pesan.</small>';
+    box.innerHTML='<p class="insight-title">'+I.bulb+'<span>Kenali orang yang ingin kamu ajak</span></p><dl><div><dt>Apa yang penting bagi mereka</dt><dd class="c"></dd></div><div><dt>Siapa yang mereka percaya</dt><dd class="t"></dd></div><div><dt>Hal yang bisa membuat mereka menjauh</dt><dd class="a"></dd></div></dl><small>Ini baru gambaran awal. Cek lagi dengan orang-orang di lingkungan yang ingin kamu jangkau.</small>';
     box.querySelector(".c").textContent=p.care;box.querySelector(".t").textContent=p.trust;box.querySelector(".a").textContent=p.away;
   }
   PROFILES.forEach(function(p,i){
@@ -545,15 +567,24 @@ textarea.input.tall{min-height:150px}
     var box=$("cards");box.innerHTML="";
     FRAMES.forEach(function(f,i){
       var el=document.createElement("article");el.className="card"+(i===0?" top":"");
-      var tabs=TABS.map(function(t){return '<button class="tab" role="tab" type="button" data-tab="'+t[0]+'"><i class="ui-icon" data-lucide="'+t[1]+'"></i>'+t[2]+'</button>';}).join("");
-      el.innerHTML=(i===0?'<span class="badge">'+I.star+'Pendekatan utama</span><p class="badge-why"></p>':'')+
+      var tabs=TABS.map(function(t){
+        var brandIcons={
+          "instagram-brand":'<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
+          "tiktok-brand":'<svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 7.2a5.8 5.8 0 0 1-4.1-4.7V2h-3.7v13.5a2.7 2.7 0 1 1-2.7-2.7c.4 0 .8.1 1.1.2V9.2a6.4 6.4 0 1 0 5.3 6.3V9.1a9.4 9.4 0 0 0 4.1 1V7.2z"/></svg>',
+          "threads-brand":'<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.7 8.1c-.8-3.1-3-4.8-6.5-4.8-4.4 0-7.1 3.2-7.1 8.6 0 5.5 2.7 8.7 7.2 8.7 3.8 0 6.2-2 6.2-5.2 0-2.8-1.8-4.5-4.8-4.5-2.1 0-3.5 1-3.5 2.7 0 1.4 1.1 2.3 2.7 2.3 1.8 0 3.2-1.1 3.8-3.1"/><path d="M10.2 7.9c1.1-.8 2.8-.8 4.1-.2 1.2.6 2 1.8 2.3 3.5"/></svg>',
+          "x-brand":'<svg class="ui-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3L12 14.6 5.6 22H2.4l7.3-8.4L1.9 2h6.5l4.5 6.8L18.9 2zm-1.1 18h1.7L7.4 3.9H5.6L17.8 20z"/></svg>'
+        };
+        var icon=brandIcons[t[1]]||'<i class="ui-icon" data-lucide="'+t[1]+'"></i>';
+        return '<button class="tab" role="tab" type="button" data-tab="'+t[0]+'">'+icon+t[2]+'</button>';
+      }).join("");
+      el.innerHTML=(i===0?'<span class="badge">'+I.star+'Pilihan utama</span><p class="badge-why"></p>':'')+
         '<div class="card-heading"><span class="theme-icon" aria-hidden="true"><i class="ui-icon" data-lucide="'+FRAME_ICONS[i]+'"></i></span><h2></h2></div><span class="tag tone-'+(i+1)+'"></span>'+
         '<div class="tabs" role="tablist" aria-label="Pilih versi">'+tabs+'</div>'+
-        '<ol class="flow"><li><i>1</i><div><b>Gagasan utama</b><span class="fv"></span></div></li><li><i>2</i><div><b>Konteks</b><span class="fp"></span></div></li><li><i>3</i><div><b>Arah perubahan</b><span class="fs"></span></div></li><li><i>4</i><div><b>Ajakan bertindak</b><span class="fa"></span></div></li></ol>'+
+        '<ol class="flow"><li><i>1</i><div><b>Pesan utama</b><span class="fv"></span></div></li><li><i>2</i><div><b>Konteks</b><span class="fp"></span></div></li><li><i>3</i><div><b>Perubahan yang diharapkan</b><span class="fs"></span></div></li><li><i>4</i><div><b>Ajakannya</b><span class="fa"></span></div></li></ol>'+
         '<div class="out"></div>'+
-        '<div class="meta"><div class="meta-row">'+I.bulb+'<div><b>Mengapa pendekatan ini relevan</b><span class="m-why"></span></div></div>'+
-        '<div class="meta-row">'+I.user+'<div><b>Siapa yang tepat menyampaikan</b><span class="m-who"></span></div></div>'+
-        '<div class="meta-row avoid">'+I.warn+'<div><b>Hal yang perlu dihindari</b><span class="m-avoid"></span></div></div></div>'+
+        '<div class="meta"><div class="meta-row">'+I.bulb+'<div><b>Kenapa pesan ini bisa cocok</b><span class="m-why"></span></div></div>'+
+        '<div class="meta-row">'+I.user+'<div><b>Siapa yang bisa menyampaikan</b><span class="m-who"></span></div></div>'+
+        '<div class="meta-row avoid">'+I.warn+'<div><b>Yang sebaiknya dihindari</b><span class="m-avoid"></span></div></div></div>'+
         '<div class="card-foot"><button class="copy" type="button">'+I.copy+'<span></span></button></div>';
       if(i===0)el.querySelector(".badge-why").textContent=f.why_top;
       el.querySelector(".tag").textContent=f.nilai;el.querySelector("h2").textContent=f.judul;
@@ -608,14 +639,18 @@ textarea.input.tall{min-height:150px}
   $("agenda").oninput=function(){updateCount();setErr("agenda","agenda-err","");};
 
   $("run-create").onclick=function(){
+    var topicChoice=picked("topik"),topic=topicChoice.getAttribute("data-other")==="topik"?$("topik-other").value.trim():topicChoice.textContent.trim();
+    if(!topic){$("topik-other").classList.remove("hidden");setErr("topik-other","topik-err","Tulis isu yang ingin kamu bicarakan.");$("topik-other").focus();return;}
+    var hopeChoice=picked("harapan"),hope=hopeChoice.getAttribute("data-other")==="harapan"?$("harapan-other").value.trim():hopeChoice.textContent.trim();
+    if(!hope){$("harapan-other").classList.remove("hidden");setErr("harapan-other","harapan-err","Tulis tindakan yang kamu harapkan.");$("harapan-other").focus();return;}
     var ag=$("agenda").value.trim()||"Mendorong pemerintah daerah beralih ke listrik tenaga surya",au=audience()||PROFILES[0].name;
     var lw=picked("lewat");activeTab=lw.getAttribute("data-tab");
-    var rows=[["Topik",picked("topik").textContent],["Agenda",ag],["Audiens",au],["Harapan",picked("harapan").textContent],["Lewat",lw.textContent]];
+    var rows=[["Topik",topic],["Agenda",ag],["Audiens",au],["Harapan",hope],["Lewat",lw.textContent]];
     var ctx=$("context");ctx.innerHTML="";
     rows.forEach(function(r){var b=document.createElement("b");b.textContent=r[0];var s=document.createElement("span");s.textContent=r[1];ctx.appendChild(b);ctx.appendChild(s);});
-    runLoading("Merancang pendekatan kampanye",["Memahami isu dan tujuan kampanyemu","Menentukan sudut pandang yang relevan bagi audiens","Menyiapkan versi pesan untuk "+lw.textContent],function(){renderCards();renderSwaps("swaps-create");go("s-results");});
+    runLoading("Menyiapkan pesan kampanye",["Membaca isu dan tujuan kampanyemu","Menyesuaikan pesan dengan orang yang ingin kamu jangkau","Menyiapkan pesan untuk "+lw.textContent],function(){renderCards();renderSwaps("swaps-create");go("s-results");});
   };
-  $("copy-all").onclick=function(){copy(FRAMES.map(function(f){return textFor(f,activeTab);}).join("\n\n———\n\n"),"Semua pendekatan berhasil disalin");};
+  $("copy-all").onclick=function(){copy(FRAMES.map(function(f){return textFor(f,activeTab);}).join("\n\n"),"Semua pesan berhasil disalin");};
   $("restart").onclick=function(){location.reload();};
   $("restart-limit").onclick=function(){location.reload();};
   // Warn before leaving while results are on screen (where the browser allows it)
